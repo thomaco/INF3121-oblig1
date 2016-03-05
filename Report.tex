@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage[margin=1in]{geometry} % narrow margins
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
@@ -13,15 +14,62 @@
 \title{Project 1 \\ Report \\ INF4121/3121} % Title
 \date{\today} % Date for the report
 
-
 \begin{document}
 
 \maketitle % Insert the title, author and date
 
-\section{Requirement 1}
+%Requirement 1
+\section{Description, analysis and test cases}
 
-\section{Requirement 2}
+\subsection{Description}
+We are going to review the program Hangman, which derives its name from the game, written in the language Java. The program consists of 5 source files, namely;
+\begin{itemize}
+\item Command.java
+\item FileReadWriter.java
+\item Game.java
+\item HangmanTets.java
+\item Players.java
+\end{itemize}
 
-\section{Requirement 3}
+\textbf{Command.java} only contains an enumerated type, which contains the possible commands for the program. \textbf{FileReadWriter.java} contains the logic for reading from and writing player objects to file for the scoreboard functionality, as well as a method for sorting and printing the scoreboard. \textbf{Game.java} contains the logic for the game itself, which means handling out, user input, checking input and printing the game dialogue. \textbf{HangmanTets.java} only initializes and starts the Game.java logic. \textbf{Players.java} contains the data structure for a player, as well as methods for fetching name and score.
+
+\subsection{Analysis of the testable parts of the program}
+Make an analysis of the testable parts of the program that you are using for the project assignment.
+
+\subsection{Design of manual system tests}
+Design the manual tests that you would perform for this program, in order to test its func!onality
+(system tests). Specify if you used a par4cular test design technique in designing your tests.
+Would it make sense or not to write non-func%onal tests for the chosen source code? Mo%vate your
+choice.
+\subsection{Test cases}
+Write a list with the concrete test cases that you obtained, as a result of the analysis and design
+performed above. The list needs to contain: pre- and post- test condi*ons (if the case), the test itself, the
+expected result and the actual result. Order the list of tests based on the importance of the tests. Can
+you tell something about your how did your previous knowledge / experience helped you in crea9ng this
+list with tests?
+
+%Requirment 2
+\section{Metrics at project and file level}
+
+\subsection{Metrics at project level}
+
+\subsection{Metrics at file level}
+
+%Requirement 3
+\section{Improvements based on metrics}
+
+\subsection{Metrics at project level that needs improvment}
+
+\subsection{List of improved/refactored code}
+%Both list of code files, and link to github public repo
+
+\subsection{New metrics at project level vs old}
+
+\subsection{New metrics at file level vs old}
+
+\section{Conclusion}
+make a couple of remarks about how easy or not it was for you to maintain the code
+(to modify it in order to improve it). Is there anything that you would have done differently on
+the ini'al code to make its maintenance easier?
 
 \end{document}
