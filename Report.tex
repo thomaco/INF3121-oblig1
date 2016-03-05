@@ -19,7 +19,7 @@
 \maketitle % Insert the title, author and date
 
 %Requirement 1
-\section{Description, analysis and test cases}
+\section{\textit{Requirement 1} - Description, analysis and test cases}
 
 \subsection{Description}
 We are going to review the program Hangman, which derives its name from the game, written in the language Java. The program consists of 5 source files, namely;
@@ -32,22 +32,43 @@ We are going to review the program Hangman, which derives its name from the game
 \end{itemize}
 
 \textbf{Command.java} only contains an enumerated type, which contains the possible commands for the program. \textbf{FileReadWriter.java} contains the logic for reading from and writing player objects to file for the scoreboard functionality, as well as a method for sorting and printing the scoreboard. \textbf{Game.java} contains the logic for the game itself, which means handling out, user input, checking input and printing the game dialogue. \textbf{HangmanTets.java} only initializes and starts the Game.java logic. \textbf{Players.java} contains the data structure for a player, as well as methods for fetching name and score.
+%end descrition
 
-\subsection{Analysis of the testable parts of the program}
-Make an analysis of the testable parts of the program that you are using for the project assignment.
+\subsection{Analysis of the testable parts of the program\newline}
+\textit{I.E - what can be tested?\newline}
+%this can be tested:
+\subsubsection{White-box testing}
+\textbf{Unit tests}%check functions for each of the files and what they "promise"
+\begin{itemize}
+\item Players.java
+\begin{enumerate}
+\item
+\textit{Player initialization and declaration variables}
+\end{enumerate}
+
+
+\item Game.java
+\item FileReadWriter.java
+%\item Command.java
+
+%\item HangmanTets.java
+\end{itemize}
+\textbf{Integration tests}
+
+
+
+\subsubsection{Black-box testing}
+\textbf{System testing\newline}
+
+%Just check if the whole thing run together
+
+\textbf{Regression testing}%applied after changes to code that worked, and checks if it still performs correctly.
 
 \subsection{Design of manual system tests}
-Design the manual tests that you would perform for this program, in order to test its func!onality
-(system tests). Specify if you used a par4cular test design technique in designing your tests.
-Would it make sense or not to write non-func%onal tests for the chosen source code? Mo%vate your
-choice.
-Non-functional: reliablity(ikke a-z, ugyldig input, fault tolerance), efficiency(minne, cpu, noe vits?), maintainability(hvordan programmet henger sammen etc).
+
+
 \subsection{Test cases}
-Write a list with the concrete test cases that you obtained, as a result of the analysis and design
-performed above. The list needs to contain: pre- and post- test condi*ons (if the case), the test itself, the
-expected result and the actual result. Order the list of tests based on the importance of the tests. Can
-you tell something about your how did your previous knowledge / experience helped you in crea9ng this
-list with tests?
+
 
 %Requirment 2
 \section{Metrics at project and file level}
