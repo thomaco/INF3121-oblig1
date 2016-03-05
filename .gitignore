@@ -1,3 +1,7 @@
 *.aux
 *.log
 *.class
+*.ser
+.DS_Store
+*.DS_Store
+*.classpath
