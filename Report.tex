@@ -3,7 +3,7 @@
 \usepackage[margin=1in]{geometry} % narrow margins
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-
+\usepackage{hyperref}
 
 %\usepackage{hyperref}
 %\usepackage{listings}
@@ -36,9 +36,16 @@ We are going to review the program Hangman, which derives its name from the game
 
 \subsection{Analysis of the testable parts of the program\newline}
 \textit{I.E - what can be tested?\newline}
+manual testing = unit, integration,system tesing (Y)
+\href{https://en.wikipedia.org/wiki/Manual_testing}{\textbf{Manual testing link}}
+
+
 %this can be tested:
 \subsubsection{White-box testing}
-\textbf{Unit tests}%check functions for each of the files and what they "promise"
+\paragraph{Unit testing}%check functions for each of the files and what they "promise"
+
+%help: http://www.softwaretestingclass.com/white-box-testing/
+
 \begin{itemize}
 \item Players.java
 \begin{enumerate}
@@ -49,20 +56,32 @@ We are going to review the program Hangman, which derives its name from the game
 
 \item Game.java
 \item FileReadWriter.java
-%\item Command.java
+\item Command.java
 
-%\item HangmanTets.java
+
+\begin{itemize}
+\item None.
 \end{itemize}
+
+\item HangmanTets.java
+\begin{itemize}
+\item None
+\end{itemize}
+\end{itemize}
+
+
 \textbf{Integration tests}
 
 
 
 \subsubsection{Black-box testing}
 \textbf{System testing\newline}
-
 %Just check if the whole thing run together
+%as specified by hangman- we have NO other requirements
+
 
 \textbf{Regression testing}%applied after changes to code that worked, and checks if it still performs correctly.
+%basically apply the same tests as before AFTER changes in code. 
 
 \subsection{Design of manual system tests}
 
