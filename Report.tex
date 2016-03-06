@@ -21,72 +21,77 @@
 %Requirement 1
 \section{\textit{Requirement 1} - Description, analysis and test cases}
 
-\subsection{Description}
-We are going to review the program Hangman, which derives its name from the game, written in the language Java. The program consists of 5 source files, namely;
-\begin{itemize}
-\item Command.java
-\item FileReadWriter.java
-\item Game.java
-\item HangmanTets.java
-\item Players.java
-\end{itemize}
+	\subsection{Description}
+	We are going to review the program Hangman, which derives its name from the game, written in the language Java. The program consists of 5 source files, namely;
+	\begin{itemize}
+	\item Command.java
+	\item FileReadWriter.java
+	\item Game.java
+	\item HangmanTets.java
+	\item Players.java
+	\end{itemize}
 
-\textbf{Command.java} only contains an enumerated type, which contains the possible commands for the program. \textbf{FileReadWriter.java} contains the logic for reading from and writing player objects to file for the scoreboard functionality, as well as a method for sorting and printing the scoreboard. \textbf{Game.java} contains the logic for the game itself, which means handling out, user input, checking input and printing the game dialogue. \textbf{HangmanTets.java} only initializes and starts the Game.java logic. \textbf{Players.java} contains the data structure for a player, as well as methods for fetching name and score.
-%end descrition
+	\textbf{Command.java} only contains an enumerated type, which contains the possible commands for the program. \textbf{FileReadWriter.java} contains the logic for reading from and writing player objects to file for the scoreboard functionality, as well as a method for sorting and printing the scoreboard. \textbf{Game.java} contains the logic for the game itself, which means handling out, user input, checking input and printing the game dialogue. \textbf{HangmanTets.java} only initializes and starts the Game.java logic. \textbf{Players.java} contains the data structure for a player, as well as methods for fetching name and score.
+	%end descrition
 
-\subsection{Analysis of the testable parts of the program\newline}
-\textit{I.E - what can be tested?\newline}
-manual testing = unit, integration,system tesing (Y)
-\href{https://en.wikipedia.org/wiki/Manual_testing}{\textbf{Manual testing link}}
-
-
-%this can be tested:
-\subsubsection{White-box testing}
-\paragraph{Unit testing}%check functions for each of the files and what they "promise"
-
-%help: http://www.softwaretestingclass.com/white-box-testing/
-
-\begin{itemize}
-\item Players.java
-\begin{enumerate}
-\item
-\textit{Player initialization and declaration variables}
-\end{enumerate}
+	\subsection{Analysis of the testable parts of the program\newline}
+	\textit{I.E - what can be tested?\newline}
+	manual testing = unit, integration,system tesing (Y)
+	\href{https://en.wikipedia.org/wiki/Manual_testing}{\textbf{Manual testing link}}
 
 
-\item Game.java
-\item FileReadWriter.java
-\item Command.java
+	%this can be tested:
+		\subsubsection{White-box testing}
+			\paragraph{Unit testing}%check functions for each of the files and what they "promise"
+
+			%help: http://www.softwaretestingclass.com/white-box-testing/
+
+			\begin{itemize}
+			\item Players.java
+				\begin{enumerate}
+				\item
+				\textit{Player initialization and declaration variables}
+				\end{enumerate}
 
 
-\begin{itemize}
-\item None.
-\end{itemize}
+			\item Game.java
+			\item FileReadWriter.java
 
-\item HangmanTets.java
-\begin{itemize}
-\item None
-\end{itemize}
-\end{itemize}
+			\item Command.java
+				\begin{itemize}
+				\item None.
+				\end{itemize}
 
-
-\textbf{Integration tests}
+			\item HangmanTets.java
+				\begin{itemize}
+				\item None
+				\end{itemize}
+			\end{itemize}
 
 
 
-\subsubsection{Black-box testing}
-\textbf{System testing\newline}
-%Just check if the whole thing run together
-%as specified by hangman- we have NO other requirements
+			\paragraph{\textbf{Integration tests}}
+				%game with players
+				%game with command.java
+				%players with filereadwritertest for serialization
+				%game with gameamantets
+				%game with filereadwritertest?
 
 
-\textbf{Regression testing}%applied after changes to code that worked, and checks if it still performs correctly.
-%basically apply the same tests as before AFTER changes in code. 
 
-\subsection{Design of manual system tests}
+	\subsubsection{Black-box testing}
+	\textbf{System testing\newline}
+	%Just check if the whole thing run together
+	%as specified by hangman- we have NO other requirements
 
 
-\subsection{Test cases}
+	\textbf{Regression testing}%applied after changes to code that worked, and checks if it still performs correctly.
+	%basically apply the same tests as before AFTER changes in code. 
+
+	\subsection{Design of manual system tests}
+
+
+	\subsection{Test cases}
 
 
 %Requirment 2
