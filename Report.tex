@@ -4,15 +4,18 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{hyperref}
+\usepackage{tabulary}
 
 %\usepackage{hyperref}
 %\usepackage{listings}
 %\usepackage[cm]{fullpage}
+\renewcommand{\labelenumii}{\arabic{enumii}.}
 
 
 
 \title{Project 1 \\ Report \\ INF4121/3121} % Title
 \date{\today} % Date for the report
+\author{Sebasting Søberg(INF4121) \& Thomas Oddsund(INF3121)}
 
 \begin{document}
 
@@ -35,58 +38,97 @@
 	%end descrition
 
 	\subsection{Analysis of the testable parts of the program\newline}
-	\textit{I.E - what can be tested?\newline}
-	manual testing = unit, integration,system tesing (Y)
-	\href{https://en.wikipedia.org/wiki/Manual_testing}{\textbf{Manual testing link}}
 
-
-	%this can be tested:
-		\subsubsection{White-box testing}
-			\paragraph{Unit testing}%check functions for each of the files and what they "promise"
-
-			%help: http://www.softwaretestingclass.com/white-box-testing/
-
-			\begin{itemize}
-			\item Players.java
-				\begin{enumerate}
-				\item
-				\textit{Player initialization and declaration variables}
-				\end{enumerate}
-
-
-			\item Game.java
-			\item FileReadWriter.java
-
-			\item Command.java
-				\begin{itemize}
-				\item None.
-				\end{itemize}
-
-			\item HangmanTets.java
-				\begin{itemize}
-				\item None
-				\end{itemize}
-			\end{itemize}
-
-
-
-			\paragraph{\textbf{Integration tests}}
-				%game with players
-				%game with command.java
-				%players with filereadwritertest for serialization
-				%game with gameamantets
-				%game with filereadwritertest?
-
-
-
-	\subsubsection{Black-box testing}
-	\textbf{System testing\newline}
+	\subsubsection{Test cases}
 	%Just check if the whole thing run together
 	%as specified by hangman- we have NO other requirements
+	
+	\begin{flushleft} %Start of test-cases
+	\begin{enumerate}
 
+	\item \textbf{Start Hangman}\newline
+	\textbf{Initial state:} No program running.
+	\begin{enumerate}
+	\item Run "java -cp . hangman.HangmanTets" from the folder containing the hangman folder with binaries
+	\end{enumerate}
+	\textbf{Expected results:} Game displays welcome-statement:
+	\begin{verbatim}
+	Welcome to the Hangman game. Please, try to guess my secret word.
+	Use 'TOP' to view the top scoreboard, 'RESTART' to start a new game,'HELP' to cheat and 'EXIT' to quit the game.
+	The secret word is:  *One-or-more underlines*
+	Enter your guess(1 letter allowed):
+	\end{verbatim}
+	\textbf{Post condition:} Game awaits input
 
-	\textbf{Regression testing}%applied after changes to code that worked, and checks if it still performs correctly.
-	%basically apply the same tests as before AFTER changes in code. 
+	\item \textbf{Single character non-letter entered}\newline
+	\textbf{Initial State:} Game running, awaiting input.
+	\begin{enumerate}
+	\item User enters character which is not an english letter
+	\end{enumerate}
+	\textbf{Expected results:} Game ignores input, asks for new character.\newline
+	\textbf{Post condition:} Game awaits input.
+
+	\item \textbf{Multiple characters entered}\newline
+	\textbf{Initial State:} Game running, awaiting input.
+	\begin{enumerate}
+	\item User enters multiple characters.
+	\end{enumerate}
+	\textbf{Expected results:} Game ignores input, asks for a new character.\newline
+	\textbf{Post condition:} Game awaits input.
+
+	\item \textbf{Correct letter entered}\newline
+	\textbf{Initial State:} One or more underlines are displayed in the secret word.
+	\begin{enumerate}
+	\item User enters a valid letter X.
+	\end{enumerate}
+	\textbf{Expected results:} Game displayes the following message; 
+	\begin{verbatim}
+	Good job! You revealed 1 letter(s).
+	The secret word is: *Current state of secret word, with letter X revealed*
+	Enter your guess(1 letter allowed):
+	\end{verbatim}
+	\textbf{Post condition:} One or more underlines are replaced with the letter in the correct position, game awaits input.
+
+	\item \textbf{Wrong letter entered}\newline
+	\textbf{Initial State:} One or more underlines are displayed in the secret word.
+	\begin{enumerate}
+	\item User enters an invalid letter X.
+	\end{enumerate}
+	\textbf{Expected results:} Game displays the following error message: 
+	\begin{verbatim}
+	Sorry! There are no unrevealed letters 'X'. 
+	The secret word is:  *Current state of secret word*
+	Enter your guess(1 letter allowed):
+	\end{verbatim}
+	\textbf{Post condition:} The state of the secret word remains unchanged, mistake counter increased by one.
+
+	\item \textbf{Test-case}\newline
+	\textbf{Initial State:}
+	\begin{enumerate}
+	\item Steps to go through
+	\end{enumerate}
+	\textbf{Expected results:}\newline
+	\textbf{Post condition:}\newline
+	\end{enumerate}
+	\end{flushleft} %End of test-cases
+
+%	\begin{center}
+%		\begin{tabulary}{1.0\textwidth}{| C | p{3cm} | p{1.6cm} |  p{4.4cm}|  p{5.5cm} |}
+%		\hline
+%			\textbf{\#} & \textbf{Pre-condition} & \textbf{Inputs} & \textbf{Expected results} & \textbf{Post-conditions} \\ \hline
+%			1 & No game running & Start the game & Welcome-message and\newline commands displayed,\newline game started & Game ready for character \\ \hline
+%			2 & Game running & Not a letter & Prompt for a new\newline character & No change of game state \\ \hline
+%			3 & Game running & More then one character\newline entered & Prompt for a new\newline character & No change of game state \\ \hline
+%			4 & Game running,\newline all dashes & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
+%			5 & Game running,\newline all dashes & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
+%			6 & Game running,\newline one or more letters\newline revealed & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
+%			7 & Game running,\newline one or more letters\newline revealed & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
+%			8 & Game running,\newline one letter missing,\newline no help used & Correct letter & Success-message and number of errors printed, asks for name for scoreboard, new round started & New game with a new random word started \\ \hline
+%			9 & Game running,\newline one letter missing,\newline help used & Correct letter & Success-message, message about help used, new round started & New game with a new random word started \\ \hline
+%			10 & 
+%		\end{tabulary}
+%	\end{center}
+
 
 	\subsection{Design of manual system tests}
 
