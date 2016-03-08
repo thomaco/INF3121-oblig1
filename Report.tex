@@ -300,7 +300,7 @@ Avg Complexity = 2,95[2.0-4.0] & Expected \\ \hline
 \includegraphics[width=0.9\textwidth]{Hangman-Kiviat-before.png}
 
 We think that \textit{Comments, Max Complexity, Max Depth and Avg Depth}
-need to change. 
+need to change. % TODO: Elaborate on this.
 
 \pagebreak
 \item
@@ -316,8 +316,46 @@ The file with the most branches is fileReadWriter.java where the branches stands
 The file with the most complex code is Game.java. The metrics used for this conclusion is Max complexity and Game.java's score here was 12. 
 
 \end{enumerate}
-\subsection{Metrics at file level}
 
+\subsection{Metrics at file level}
+\vspace {0.10 cm}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{FileReadWriter-kiviat-before.png}
+\end{center}
+\begin{enumerate}
+\item
+How	do	you	interpret	 the	metrics	applied	on	your	file? How	are	 they	different	 the	metrics	you	
+obtained	on	the	whole	project,	compared	with	the	metrics	on	this	file?\newline
+\textbf{We chosed FileReadWriter.java}
+We interpret FileReadWriter as less complex and with lower depth than
+the whole project. Also the comments on this file looks greater than in
+the entire project. The balance of the "green values" are also more balanced for Avg complexity
+and Methods/class than in the project. 
+
+%Project vs FileReadWriter.java
+
+\item
+Would	you	refactor	(re-write)	any	of	the	methods you	have	in	this	file?	
+
+Most definitly:
+\begin{enumerate}
+\item
+closeFileFromReading() because it only calls another method, namely: tryCloseFileFromReading so there is no need for closeFileFromReading.
+
+\item
+nop() this method does nothing productive. Its not called from any other method in the class so it isn't used. And it is not possible to use with a reference since it is private.  It only calls System.out.println(true);
+and outputs that 15 times. So we can erase this one as well. 
+
+\item
+oldReadRecords() calls readRecords() 5 times. But for no apperent reason.
+This is undefined behavior because it doesnt check of many records that eventually
+would've been stored. It has the same problem as nop(), it is private and nothing else in this class is using it so it is rubbish.
+
+
+\end{enumerate}
+
+
+\end{enumerate}
 %Requirement 3
 \section{\textit{Requirement 3} -Improvements based on metrics}
 

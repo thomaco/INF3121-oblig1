@@ -172,7 +172,7 @@ public class FileReadWriter {
 		}
 	}
 
-	private void nop()
+	public void nop()
 	{
 		System.out.println(true);
 		{
@@ -207,7 +207,7 @@ public class FileReadWriter {
 		}
 	}
 
-	private void oldReadRecords()
+	public void oldReadRecords()
 	{
 		readRecords();
 		readRecords();

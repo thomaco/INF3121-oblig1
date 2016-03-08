@@ -78,7 +78,7 @@ public class FileReadWriterTest {
 			e.printStackTrace();
 		}
 		//##### This can be classified as an integration test   #####
-		
+		opener.nop();
 		
 	}
 	
