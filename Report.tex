@@ -6,6 +6,7 @@
 \usepackage{hyperref}
 \usepackage{tabulary}
 \usepackage{verbatim}
+\usepackage{listings}
 
 %\usepackage{hyperref}
 %\usepackage{listings}
@@ -46,6 +47,7 @@
 	
  %Start of test-cases
 	\begin{enumerate}
+	\setlength\itemsep{2em}
 
 	\item \textbf{Start Hangman}\newline
 	\textbf{Initial state:} No program running.
@@ -53,12 +55,13 @@
 	\item Run "java -cp . hangman.HangmanTets" from the folder containing the hangman folder with binaries
 	\end{enumerate}
 	\textbf{Expected results:} Game displays welcome-statement:
-	\begin{verbatim}
+	\begin{lstlisting}[breaklines, gobble=8]
 	Welcome to the Hangman game. Please, try to guess my secret word.
-	Use 'TOP' to view the top scoreboard, 'RESTART' to start a new game,'HELP' to cheat and 'EXIT' to quit the game.
+	Use 'TOP' to view the top scoreboard, 'RESTART' to start a new game, 
+	'HELP' to cheat and 'EXIT' to quit the game.
 	The secret word is:  *One-or-more underlines*
 	Enter your guess(1 letter allowed):
-	\end{verbatim}
+	\end{lstlisting}
 	\textbf{Post condition:} Game awaits input
 
 	\item \textbf{Single character non-letter entered}\newline
@@ -78,16 +81,16 @@
 	\textbf{Post condition:} Game awaits input.
 
 	\item \textbf{Correct letter entered}\newline
-	\textbf{Initial State:} One or more underlines are displayed in the secret word.
+	\textbf{Initial State:} Multiple underlines are displayed in the secret word, more then one unique letter missing.
 	\begin{enumerate}
 	\item User enters a valid letter X.
 	\end{enumerate}
 	\textbf{Expected results:} Game displayes the following message; 
-	\begin{verbatim}
+	\begin{lstlisting}[breaklines, gobble=8]
 	Good job! You revealed 1 letter(s).
-	The secret word is: *Current state of secret word, with letter X revealed*
+	The secret word is: *Current state of secret word,  letter X revealed*
 	Enter your guess(1 letter allowed):
-	\end{verbatim}
+	\end{lstlisting}
 	\textbf{Post condition:} One or more underlines are replaced with the letter in the correct position, game awaits input.
 
 	\item \textbf{Wrong letter entered}\newline
@@ -96,11 +99,11 @@
 	\item User enters an invalid letter X.
 	\end{enumerate}
 	\textbf{Expected results:} Game displays the following error message: 
-	\begin{verbatim}
+	\begin{lstlisting}[breaklines, gobble=8]
 	Sorry! There are no unrevealed letters 'X'. 
 	The secret word is:  *Current state of secret word*
 	Enter your guess(1 letter allowed):
-	\end{verbatim}
+	\end{lstlisting}
 	\textbf{Post condition:} The state of the secret word remains unchanged, mistake counter increased by one.
 
 	\item \textbf{Correct letter reveals last letter(no help used)}\newline
@@ -109,47 +112,70 @@
 	\item User enters a valid letter X
 	\end{enumerate}
 	\textbf{Expected results:}Game displays the following success-message;
-	\begin{verbatim}
+	\begin{lstlisting}[breaklines, gobble=8]
 	Good job! You revealed 1 letter(s).
 	You won with Y mistake(s).
 	The secret word is:  *SECRET WORD*
 	Please enter your name for the top scoreboard:
-	\end{verbatim}
+	\end{lstlisting}
 	Where Y is the number of unique incorrect letters typed in by the user.\newline
 	\textbf{Post condition:}Game ready for input for scoreboard\newline
 
 	\item \textbf{Correct letter reveals last letter(help used)}\newline
-	\textbf{Initial State:}One unique letter missing and help used
+	\textbf{Initial State:} One unique letter missing and help used
 	\begin{enumerate}
 	\item User enters a valid letter X.
 	\end{enumerate}
 	\textbf{Expected results:}
-	\begin{verbatim}
+	\begin{lstlisting}[breaklines, gobble=8]
 	Good job! You revealed 1 letter(s).
-	You won with Y mistake(s). but you have cheated. You are not allowed to enter into the scoreboard.
+	You won with Y mistake(s). but you have cheated. You are not allowed to 
+	enter into the scoreboard.
 	The secret word is:  *SECRET WORD*
-	\end{verbatim}
-	Where Y is the number of unique incorrect letter typed in by the user.
+	\end{lstlisting}
+	Where Y is the number of unique incorrect letter typed in by the user.\newline
 	\textbf{Post condition:} Game restarts, then displays welcome statement and awaits input.\newline
 
 	\item \textbf{User enters name for scoreboard}\newline
-	\textbf{Initial State:}User have guessed the correct word without the help command
+	\textbf{Initial State:} User have guessed the correct word without the help command
 	\begin{enumerate}
 	\item User guesses the correct word
 	\item User inputs name for scoreboard
 	\end{enumerate}
-	\textbf{Expected results:}\newline
-	\textbf{Post condition:}\newline
+	\textbf{Expected results:} Name+score stored in records, new game started\newline
+	\textbf{Post condition:} Scoreboard has one new entry containing the playername + score, and a new game has started.\newline
 
-
-
-	\item \textbf{Test-case}\newline
-	\textbf{Initial State:}
+	\item \textbf{Help command}\newline
+	\textbf{Initial State:} Game running and awaiting user input
 	\begin{enumerate}
-	\item Steps to go through
+	\item User enters "help"
 	\end{enumerate}
-	\textbf{Expected results:}\newline
-	\textbf{Post condition:}\newline
+	\textbf{Expected results:}One letter is revealed in the secret word.\newline
+	\textbf{Post condition:}Game awaits user input.\newline
+
+	\item \textbf{Restart command}\newline
+	\textbf{Initial State:} Game running and awaiting user input.
+	\begin{enumerate}
+	\item User enters "restart"
+	\end{enumerate}
+	\textbf{Expected results:} The game starts a new game.\newline
+	\textbf{Post condition:} New game with a new word running, game awaits user input.\newline
+
+	\item \textbf{Top command}\newline
+	\textbf{Initial State:} Game running and awaiting user input.
+	\begin{enumerate}
+	\item User enters "top"
+	\end{enumerate}
+	\textbf{Expected results:} Game displays the scoreboard and starts a new game.\newline
+	\textbf{Post condition:} Game awaits user input.\newline
+
+	\item \textbf{Exit command}\newline
+	\textbf{Initial State:} Game running and awaiting user input.
+	\begin{enumerate}
+	\item User enters "exit"
+	\end{enumerate}
+	\textbf{Expected results:}Game exits\newline
+	\textbf{Post condition:}No game running\newline
 	\end{enumerate}
  %End of test-cases
 
