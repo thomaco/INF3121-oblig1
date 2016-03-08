@@ -42,8 +42,10 @@
 	\subsection{Analysis of the testable parts of the program\newline}
 	As this program shipped with no requirment, we had to rely on experience and knowledge about the game of hangman to create a model of the flow of the program. This model was based both on our experience, as well as observed behaviour of the program. From this model, we could use black-box technique to design test cases for the program. The test cases were then built as pr. definition, with pre- and post-conditions, inital state, result and steps.
 
-	\subsection{Test cases}
-	
+	\subsection{Test cases - Functional testing}
+	Here we use the black-box technique where we don´t see the internal
+	structure of the program at all.
+
  %Start of test-cases
 %Missing test-case for checking number of mistakes is correct?
 	\begin{enumerate}
@@ -189,6 +191,32 @@
 	\textbf{Expected results:} Game displays the scoreboard and starts a new game.\newline
 	\textbf{Post condition:} Game awaits user input.\newline
 	\end{enumerate}
+
+	\textbf{Non-functional testing}
+	After some discussion we realized that som factors in non-functional testing
+	are of importance. Namely:
+	\begin{enumerate}
+		\item
+		\textbf{Performance}
+		After each game "round" the program calls: new Game()
+		which can be a performance bottleneck whereas one plays
+		this game several million times. This can happen in situations
+		where this program are loaded onto a locked device for playing.
+		So instead of calling new Game() one should simply call a startMethod instead.
+		And move the internal statements in the constructor over in that method so we 
+		avoid having multiple Games on the stack which increases space requirements.
+
+		\item
+		\textbf{Maintainability}
+		The system is poorly documented and the statements is not intuitively named everywhere.
+		There are also some methods which doesn´t do anything except increasing the complexity of
+		the program. Also there are places where exceptions are caught individually without any
+		purpose. And all of this makes the code harder to analyze and or change.
+
+
+	\end{enumerate}
+
+
  %End of test-cases
 
 	\begin{comment}
