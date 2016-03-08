@@ -249,6 +249,62 @@
 
 \subsection{Metrics at project level}
 
+
+
+%metrics at project level
+\begin{enumerate}
+\item
+The metrics of Checkpoint summary:\newline
+\begin{tabulary}{1.0\textwidth}{| C | l |}
+	\hline
+	\textbf{Parameter} & \textbf{Value} \\ \hline
+	Files & 5 \\ \hline
+	Lines & 441 \\ \hline
+	Statements & 222 \\ \hline
+	Percent Branch Statements & 18.5 \\ \hline
+	Method Call Statements & 147 \\ \hline
+	Percent Lines with Comments & 5.2 \\ \hline
+	Classes and Interfaces & 5 \\ \hline
+	Methods per Class & 4,20 \\ \hline
+	Average Statements per Method & 8,14 \\ \hline
+	Name of Most Complex Method & Game.findLetterAndPrintlt() \\ \hline
+	Maximum Complexity & 12 \\ \hline
+	Maximum Block Depth & 9+ \\ \hline
+	Average Block Depth & 2,90 \\ \hline
+	Average Complexity & 2,95 \\ \hline
+	Line Number of Most Complex Method & undefined \\ \hline
+	Line Number of Deepest Block & undefined \\ \hline
+\end{tabulary}
+
+Kiviat Graph:\newline
+\begin{tabulary}{1.0\textwidth}{| C | p{3cm} |}
+ \hline
+Comments = 5,2[8-20] & Under \\ \hline
+Methods/Class = 4,20[4-16] & Expected \\ \hline
+Avd Stmts/Method = 8,14[6-12] & Expected \\ \hline
+Max Complexity = 12[2-8] & Over \\ \hline
+Max Depth = 9+[3-7] & Over \\ \hline
+Av Depth = 2,90[1.0-2.2] & Over \\ \hline
+Avg Complexity = 2,95[2.0-4.0] & Expected \\ \hline
+\end{tabulary}
+
+We think that % Comments, Max Complexity, Max Depth and Avg Depth
+needs to change. 
+
+
+\item
+The biggest file by the number of lines is fileReadWriter.java with 219 lines.
+
+
+\item
+The file with the most branches is fileReadWriter.java where the branches stands for
+20,8 % of the file. 
+
+
+\item
+The file with the most complex code is Game.java. The metrics used for this conclusion is Max complexity and Game.java's score here was 12. 
+
+\end{enumerate}
 \subsection{Metrics at file level}
 
 %Requirement 3
