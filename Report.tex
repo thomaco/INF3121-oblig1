@@ -50,7 +50,8 @@
 	\setlength\itemsep{2em}
 
 	\item \textbf{Start Hangman}\newline
-	\textbf{Initial state:} No program running.
+	\textbf{Initial state:} No program running.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item Run "java -cp . hangman.HangmanTets" from the folder containing the hangman folder with binaries
 	\end{enumerate}
@@ -65,7 +66,8 @@
 	\textbf{Post condition:} Game awaits input
 
 	\item \textbf{Single character non-letter entered}\newline
-	\textbf{Initial State:} Game running, awaiting input.
+	\textbf{Initial State:} Game running, awaiting input.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters character which is not an english letter
 	\end{enumerate}
@@ -73,7 +75,8 @@
 	\textbf{Post condition:} Game awaits input.
 
 	\item \textbf{Multiple characters entered}\newline
-	\textbf{Initial State:} Game running, awaiting input.
+	\textbf{Initial State:} Game running, awaiting input.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters multiple characters.
 	\end{enumerate}
@@ -81,7 +84,8 @@
 	\textbf{Post condition:} Game awaits input.
 
 	\item \textbf{Correct letter entered}\newline
-	\textbf{Initial State:} Multiple underlines are displayed in the secret word, more then one unique letter missing.
+	\textbf{Initial State:} Multiple underlines are displayed in the secret word, more then one unique letter missing.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters a valid letter X.
 	\end{enumerate}
@@ -94,7 +98,8 @@
 	\textbf{Post condition:} One or more underlines are replaced with the letter in the correct position, game awaits input.
 
 	\item \textbf{Wrong letter entered}\newline
-	\textbf{Initial State:} One or more underlines are displayed in the secret word.
+	\textbf{Initial State:} One or more underlines are displayed in the secret word.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters an invalid letter X.
 	\end{enumerate}
@@ -107,7 +112,8 @@
 	\textbf{Post condition:} The state of the secret word remains unchanged, mistake counter increased by one.
 
 	\item \textbf{Correct letter reveals last letter(no help used)}\newline
-	\textbf{Initial State:} One unique letter missing and no help used
+	\textbf{Initial State:} One unique letter missing and no help used.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters a valid letter X
 	\end{enumerate}
@@ -122,7 +128,8 @@
 	\textbf{Post condition:}Game ready for input for scoreboard\newline
 
 	\item \textbf{Correct letter reveals last letter(help used)}\newline
-	\textbf{Initial State:} One unique letter missing and help used
+	\textbf{Initial State:} One unique letter missing and help used.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters a valid letter X.
 	\end{enumerate}
@@ -137,7 +144,8 @@
 	\textbf{Post condition:} Game restarts, then displays welcome statement and awaits input.\newline
 
 	\item \textbf{User enters name for scoreboard}\newline
-	\textbf{Initial State:} User have guessed the correct word without the help command
+	\textbf{Initial State:} User have guessed the correct word without the help command.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User guesses the correct word
 	\item User inputs name for scoreboard
@@ -146,7 +154,8 @@
 	\textbf{Post condition:} Scoreboard has one new entry containing the playername + score, and a new game has started.\newline
 
 	\item \textbf{Help command}\newline
-	\textbf{Initial State:} Game running and awaiting user input
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters "help"
 	\end{enumerate}
@@ -154,7 +163,8 @@
 	\textbf{Post condition:}Game awaits user input.\newline
 
 	\item \textbf{Restart command}\newline
-	\textbf{Initial State:} Game running and awaiting user input.
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters "restart"
 	\end{enumerate}
@@ -162,7 +172,8 @@
 	\textbf{Post condition:} New game with a new word running, game awaits user input.\newline
 
 	\item \textbf{Top command}\newline
-	\textbf{Initial State:} Game running and awaiting user input.
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters "top"
 	\end{enumerate}
@@ -170,7 +181,8 @@
 	\textbf{Post condition:} Game awaits user input.\newline
 
 	\item \textbf{Exit command}\newline
-	\textbf{Initial State:} Game running and awaiting user input.
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters "exit"
 	\end{enumerate}
