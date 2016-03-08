@@ -7,6 +7,7 @@
 \usepackage{tabulary}
 \usepackage{verbatim}
 \usepackage{listings}
+\usepackage{graphicx}
 
 %\usepackage{hyperref}
 %\usepackage{listings}
@@ -280,7 +281,9 @@
 %metrics at project level
 \begin{enumerate}
 \item
-The metrics of Checkpoint summary:\newline
+The metrics of Checkpoint summary:
+\vspace {0.08 cm}
+
 \begin{tabulary}{1.0\textwidth}{| C | l |}
 	\hline
 	\textbf{Parameter} & \textbf{Value} \\ \hline
@@ -301,8 +304,13 @@ The metrics of Checkpoint summary:\newline
 	Line Number of Most Complex Method & undefined \\ \hline
 	Line Number of Deepest Block & undefined \\ \hline
 \end{tabulary}
+\newline
+\vspace*{0.5 cm}
+\newline
+Kiviat Graph:
+\vspace {0.08 cm}
 
-Kiviat Graph:\newline
+\begin{comment}
 \begin{tabulary}{1.0\textwidth}{| C | p{3cm} |}
  \hline
 Comments = 5,2[8-20] & Under \\ \hline
@@ -313,11 +321,14 @@ Max Depth = 9+[3-7] & Over \\ \hline
 Av Depth = 2,90[1.0-2.2] & Over \\ \hline
 Avg Complexity = 2,95[2.0-4.0] & Expected \\ \hline
 \end{tabulary}
+\end{comment}
 
-We think that % Comments, Max Complexity, Max Depth and Avg Depth
-needs to change. 
+\includegraphics[width=0.9\textwidth]{Hangman-Kiviat-before.png}
 
+We think that \textit{Comments, Max Complexity, Max Depth and Avg Depth}
+need to change. 
 
+\pagebreak
 \item
 The biggest file by the number of lines is fileReadWriter.java with 219 lines.
 
