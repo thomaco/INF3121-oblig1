@@ -40,12 +40,14 @@
 	%end descrition
 
 	\subsection{Analysis of the testable parts of the program\newline}
+	As this program shipped with no requirment, we had to rely on experience and knowledge about the game of hangman to create a model of the flow of the program. This model was based both on our experience, as well as observed behaviour of the program. From this model, we could use black-box technique to design test cases for the program. The test cases were then built as pr. definition, with pre- and post-conditions, inital state, result and steps.
 
 	\subsection{Test cases}
 	
  %Start of test-cases
+%Missing test-case for checking number of mistakes is correct?
 	\begin{enumerate}
-	\setlength\itemsep{2em}
+	\setlength\itemsep{1em}
 
 	\item \textbf{Start Hangman}\newline
 	\textbf{Initial state:} No program running.\newline
@@ -62,24 +64,6 @@
 	Enter your guess(1 letter allowed):
 	\end{lstlisting}
 	\textbf{Post condition:} Game awaits input
-
-	\item \textbf{Single non-alphabetic character}\newline
-	\textbf{Initial State:} Game running, awaiting input.\newline
-	\textbf{Steps:}
-	\begin{enumerate}
-	\item User enters character which is not an english letter
-	\end{enumerate}
-	\textbf{Expected results:} Game ignores input, asks for new character.\newline
-	\textbf{Post condition:} Game awaits input.
-
-	\item \textbf{Multiple characters entered}\newline
-	\textbf{Initial State:} Game running, awaiting input.\newline
-	\textbf{Steps:}
-	\begin{enumerate}
-	\item User enters multiple characters.
-	\end{enumerate}
-	\textbf{Expected results:} Game ignores input, asks for a new character.\newline
-	\textbf{Post condition:} Game awaits input.
 
 	\item \textbf{Correct letter entered}\newline
 	\textbf{Initial State:} Multiple underlines are displayed in the secret word, more then one unique letter missing.\newline
@@ -125,6 +109,33 @@
 	Where Y is the number of unique incorrect letters typed in by the user.\newline
 	\textbf{Post condition:}Game ready for input for scoreboard\newline
 
+	\item \textbf{Single non-alphabetic character}\newline
+	\textbf{Initial State:} Game running, awaiting input.\newline
+	\textbf{Steps:}
+	\begin{enumerate}
+	\item Users enters a non-alphabetic character.
+	\end{enumerate}
+	\textbf{Expected results:} Game ignores input, asks for new character.\newline
+	\textbf{Post condition:} Game awaits input.
+
+	\item \textbf{Multiple characters entered}\newline
+	\textbf{Initial State:} Game running, awaiting input.\newline
+	\textbf{Steps:}
+	\begin{enumerate}
+	\item User enters multiple characters.
+	\end{enumerate}
+	\textbf{Expected results:} Game ignores input, asks for a new character.\newline
+	\textbf{Post condition:} Game awaits input.
+
+	\item \textbf{Help command}\newline
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
+	\begin{enumerate}
+	\item User enters "help"
+	\end{enumerate}
+	\textbf{Expected results:} One letter is revealed in the secret word. help flag set for user in this game.\newline
+	\textbf{Post condition:} Help flag is set on user, game awaits user input.\newline
+
 	\item \textbf{Correct letter reveals last letter(help used)}\newline
 	\textbf{Initial State:} One unique letter missing and help used.\newline
 	\textbf{Steps:}
@@ -141,6 +152,24 @@
 	Where Y is the number of unique incorrect letter typed in by the user.\newline
 	\textbf{Post condition:} Game restarts, then displays welcome statement and awaits input.\newline
 
+	\item \textbf{Restart command}\newline
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
+	\begin{enumerate}
+	\item User enters "restart"
+	\end{enumerate}
+	\textbf{Expected results:} The game starts a new game.\newline
+	\textbf{Post condition:} New game with a new word running, game awaits user input.\newline
+
+	\item \textbf{Exit command}\newline
+	\textbf{Initial State:} Game running and awaiting user input.\newline
+	\textbf{Steps:}
+	\begin{enumerate}
+	\item User enters "exit"
+	\end{enumerate}
+	\textbf{Expected results:}Game exits\newline
+	\textbf{Post condition:}No game running\newline
+
 	\item \textbf{User enters name for scoreboard}\newline
 	\textbf{Initial State:} User have guessed the correct word without the help command.\newline
 	\textbf{Steps:}
@@ -151,24 +180,6 @@
 	\textbf{Expected results:} Name+score stored in records, new game started\newline
 	\textbf{Post condition:} Scoreboard has one new entry containing the playername + score, and a new game has started.\newline
 
-	\item \textbf{Help command}\newline
-	\textbf{Initial State:} Game running and awaiting user input.\newline
-	\textbf{Steps:}
-	\begin{enumerate}
-	\item User enters "help"
-	\end{enumerate}
-	\textbf{Expected results:}One letter is revealed in the secret word.\newline
-	\textbf{Post condition:}Game awaits user input.\newline
-
-	\item \textbf{Restart command}\newline
-	\textbf{Initial State:} Game running and awaiting user input.\newline
-	\textbf{Steps:}
-	\begin{enumerate}
-	\item User enters "restart"
-	\end{enumerate}
-	\textbf{Expected results:} The game starts a new game.\newline
-	\textbf{Post condition:} New game with a new word running, game awaits user input.\newline
-
 	\item \textbf{Top command}\newline
 	\textbf{Initial State:} Game running and awaiting user input.\newline
 	\textbf{Steps:}
@@ -177,15 +188,6 @@
 	\end{enumerate}
 	\textbf{Expected results:} Game displays the scoreboard and starts a new game.\newline
 	\textbf{Post condition:} Game awaits user input.\newline
-
-	\item \textbf{Exit command}\newline
-	\textbf{Initial State:} Game running and awaiting user input.\newline
-	\textbf{Steps:}
-	\begin{enumerate}
-	\item User enters "exit"
-	\end{enumerate}
-	\textbf{Expected results:}Game exits\newline
-	\textbf{Post condition:}No game running\newline
 	\end{enumerate}
  %End of test-cases
 
