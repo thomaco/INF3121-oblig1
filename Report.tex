@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{hyperref}
 \usepackage{tabulary}
+\usepackage{verbatim}
 
 %\usepackage{hyperref}
 %\usepackage{listings}
@@ -43,7 +44,7 @@
 	%Just check if the whole thing run together
 	%as specified by hangman- we have NO other requirements
 	
-	\begin{flushleft} %Start of test-cases
+ %Start of test-cases
 	\begin{enumerate}
 
 	\item \textbf{Start Hangman}\newline
@@ -102,6 +103,46 @@
 	\end{verbatim}
 	\textbf{Post condition:} The state of the secret word remains unchanged, mistake counter increased by one.
 
+	\item \textbf{Correct letter reveals last letter(no help used)}\newline
+	\textbf{Initial State:} One unique letter missing and no help used
+	\begin{enumerate}
+	\item User enters a valid letter X
+	\end{enumerate}
+	\textbf{Expected results:}Game displays the following success-message;
+	\begin{verbatim}
+	Good job! You revealed 1 letter(s).
+	You won with Y mistake(s).
+	The secret word is:  *SECRET WORD*
+	Please enter your name for the top scoreboard:
+	\end{verbatim}
+	Where Y is the number of unique incorrect letters typed in by the user.\newline
+	\textbf{Post condition:}Game ready for input for scoreboard\newline
+
+	\item \textbf{Correct letter reveals last letter(help used)}\newline
+	\textbf{Initial State:}One unique letter missing and help used
+	\begin{enumerate}
+	\item User enters a valid letter X.
+	\end{enumerate}
+	\textbf{Expected results:}
+	\begin{verbatim}
+	Good job! You revealed 1 letter(s).
+	You won with Y mistake(s). but you have cheated. You are not allowed to enter into the scoreboard.
+	The secret word is:  *SECRET WORD*
+	\end{verbatim}
+	Where Y is the number of unique incorrect letter typed in by the user.
+	\textbf{Post condition:} Game restarts, then displays welcome statement and awaits input.\newline
+
+	\item \textbf{User enters name for scoreboard}\newline
+	\textbf{Initial State:}User have guessed the correct word without the help command
+	\begin{enumerate}
+	\item User guesses the correct word
+	\item User inputs name for scoreboard
+	\end{enumerate}
+	\textbf{Expected results:}\newline
+	\textbf{Post condition:}\newline
+
+
+
 	\item \textbf{Test-case}\newline
 	\textbf{Initial State:}
 	\begin{enumerate}
@@ -110,24 +151,26 @@
 	\textbf{Expected results:}\newline
 	\textbf{Post condition:}\newline
 	\end{enumerate}
-	\end{flushleft} %End of test-cases
+ %End of test-cases
 
-%	\begin{center}
-%		\begin{tabulary}{1.0\textwidth}{| C | p{3cm} | p{1.6cm} |  p{4.4cm}|  p{5.5cm} |}
-%		\hline
-%			\textbf{\#} & \textbf{Pre-condition} & \textbf{Inputs} & \textbf{Expected results} & \textbf{Post-conditions} \\ \hline
-%			1 & No game running & Start the game & Welcome-message and\newline commands displayed,\newline game started & Game ready for character \\ \hline
-%			2 & Game running & Not a letter & Prompt for a new\newline character & No change of game state \\ \hline
-%			3 & Game running & More then one character\newline entered & Prompt for a new\newline character & No change of game state \\ \hline
-%			4 & Game running,\newline all dashes & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
-%			5 & Game running,\newline all dashes & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
-%			6 & Game running,\newline one or more letters\newline revealed & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
-%			7 & Game running,\newline one or more letters\newline revealed & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
-%			8 & Game running,\newline one letter missing,\newline no help used & Correct letter & Success-message and number of errors printed, asks for name for scoreboard, new round started & New game with a new random word started \\ \hline
-%			9 & Game running,\newline one letter missing,\newline help used & Correct letter & Success-message, message about help used, new round started & New game with a new random word started \\ \hline
-%			10 & 
-%		\end{tabulary}
-%	\end{center}
+	\begin{comment}
+	\begin{center}
+		\begin{tabulary}{1.0\textwidth}{| C | p{3cm} | p{1.6cm} |  p{4.4cm}|  p{5.5cm} |}
+		\hline
+			\textbf{\#} & \textbf{Pre-condition} & \textbf{Inputs} & \textbf{Expected results} & \textbf{Post-conditions} \\ \hline
+			1 & No game running & Start the game & Welcome-message and\newline commands displayed,\newline game started & Game ready for character \\ \hline
+			2 & Game running & Not a letter & Prompt for a new\newline character & No change of game state \\ \hline
+			3 & Game running & More then one character\newline entered & Prompt for a new\newline character & No change of game state \\ \hline
+			4 & Game running,\newline all dashes & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
+			5 & Game running,\newline all dashes & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
+			6 & Game running,\newline one or more letters\newline revealed & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
+			7 & Game running,\newline one or more letters\newline revealed & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
+			8 & Game running,\newline one letter missing,\newline no help used & Correct letter & Success-message and number of errors printed, asks for name for scoreboard, new round started & New game with a new random word started \\ \hline
+			9 & Game running,\newline one letter missing,\newline help used & Correct letter & Success-message, message about help used, new round started & New game with a new random word started \\ \hline
+			10 & 
+		\end{tabulary}
+	\end{center}
+	\end{comment}
 
 
 	\subsection{Design of manual system tests}
