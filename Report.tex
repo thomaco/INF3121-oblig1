@@ -40,7 +40,7 @@
 	\textbf{Command.java} only contains an enumerated type, which contains the possible commands for the program. \textbf{FileReadWriter.java} contains the logic for reading from and writing player objects to file for the scoreboard functionality, as well as a method for sorting and printing the scoreboard. \textbf{Game.java} contains the logic for the game itself, which means handling out, user input, checking input and printing the game dialogue. \textbf{HangmanTets.java} only initializes and starts the Game.java logic. \textbf{Players.java} contains the data structure for a player, as well as methods for fetching name and score.
 	%end descrition
 
-	\subsection{Analysis of the testable parts of the program\newline}
+	\subsection{Analysis of the testable parts of the program}
 	As this program shipped with no requirment, we had to rely on experience and knowledge about the game of hangman to create a model of the flow of the program. This model was based both on our experience, as well as observed behaviour of the program. From this model, we could use black-box technique to design test cases for the program. The test cases were then built as pr. definition, with pre- and post-conditions, inital state, result and steps.
 	
 	Out previous experience and knowledge helped us in setting up the requirements and model, from which we derived the different test cases. For the test cases, it especially made us set up cases for various forms of input, both valid and invalid, as this is the main vector from which users interact with the system.
@@ -209,15 +209,15 @@
 	\end{enumerate}
 
 	\textbf{Non-functional testing}
-	After some discussion we realized that som factors in non-functional testing
+	After some discussion we realized that some factors in non-functional testing
 	are of importance. Namely:
 	\begin{enumerate}
 		\item
 		\textbf{Performance}
 		The performance of the program can be tested. Since this is supposed to be a rather simple program,
 		a few things to test can be that it handles input fast enough(i.e. that it prints out correct/incorrect, and that it's ready
-		for new input within a set time) and that it uses minimal amount of memory(i.e. locked device where it runs in a continous
-		loop can lead to the program crashing if it continously instanties new classes in the wrong way).
+		for new input within a set time) and that it uses minimal amount of memory(i.e. locked device where it runs in a continuous
+		loop can lead to a stack overflow if it continuously instantiates new classes in the wrong way).
 		\begin{comment}
 		After each game "round" the program calls: new Game()
 		which can be a performance bottleneck whereas one plays
@@ -245,34 +245,8 @@
 
  %End of test-cases
 
-	\begin{comment}
-	\begin{center}
-		\begin{tabulary}{1.0\textwidth}{| C | p{3cm} | p{1.6cm} |  p{4.4cm}|  p{5.5cm} |}
-		\hline
-			\textbf{\#} & \textbf{Pre-condition} & \textbf{Inputs} & \textbf{Expected results} & \textbf{Post-conditions} \\ \hline
-			1 & No game running & Start the game & Welcome-message and\newline commands displayed,\newline game started & Game ready for character \\ \hline
-			2 & Game running & Not a letter & Prompt for a new\newline character & No change of game state \\ \hline
-			3 & Game running & More then one character\newline entered & Prompt for a new\newline character & No change of game state \\ \hline
-			4 & Game running,\newline all dashes & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
-			5 & Game running,\newline all dashes & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
-			6 & Game running,\newline one or more letters\newline revealed & Correct letter & Letter revealed & Dash removed in solution word where correct letter is placed and ready for next letter \\ \hline
-			7 & Game running,\newline one or more letters\newline revealed & Wrong letter & No letter revealed & Message stating that no letters were found and ready for new letter \\ \hline
-			8 & Game running,\newline one letter missing,\newline no help used & Correct letter & Success-message and number of errors printed, asks for name for scoreboard, new round started & New game with a new random word started \\ \hline
-			9 & Game running,\newline one letter missing,\newline help used & Correct letter & Success-message, message about help used, new round started & New game with a new random word started \\ \hline
-			10 & 
-		\end{tabulary}
-	\end{center}
-	\end{comment}
-
-
-	\subsection{Design of manual system tests}
-
-
-	\subsection{Test cases}
-
-
 %Requirment 2
-\section{Metrics at project and file level}
+\section{\textit{Requirement 2} - Metrics at project and file level}
 
 \subsection{Metrics at project level}
 
@@ -345,7 +319,7 @@ The file with the most complex code is Game.java. The metrics used for this conc
 \subsection{Metrics at file level}
 
 %Requirement 3
-\section{Improvements based on metrics}
+\section{\textit{Requirement 3} -Improvements based on metrics}
 
 \subsection{Metrics at project level that needs improvment}
 
