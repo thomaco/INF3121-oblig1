@@ -13,6 +13,7 @@
 %\usepackage{listings}
 %\usepackage[cm]{fullpage}
 \renewcommand{\labelenumii}{\arabic{enumii}.}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
 
 
@@ -250,72 +251,66 @@
 
 \subsection{Metrics at project level}
 
-
-
 %metrics at project level
-\begin{enumerate}
-\item
-The metrics of Checkpoint summary:
-\vspace {0.08 cm}
-
-\begin{tabulary}{1.0\textwidth}{| C | l |}
-	\hline
-	\textbf{Parameter} & \textbf{Value} \\ \hline
-	Files & 5 \\ \hline
-	Lines & 441 \\ \hline
-	Statements & 222 \\ \hline
-	Percent Branch Statements & 18.5 \\ \hline
-	Method Call Statements & 147 \\ \hline
-	Percent Lines with Comments & 5.2 \\ \hline
-	Classes and Interfaces & 5 \\ \hline
-	Methods per Class & 4,20 \\ \hline
-	Average Statements per Method & 8,14 \\ \hline
-	Name of Most Complex Method & Game.findLetterAndPrintlt() \\ \hline
-	Maximum Complexity & 12 \\ \hline
-	Maximum Block Depth & 9+ \\ \hline
-	Average Block Depth & 2,90 \\ \hline
-	Average Complexity & 2,95 \\ \hline
-	Line Number of Most Complex Method & undefined \\ \hline
-	Line Number of Deepest Block & undefined \\ \hline
+\begin{tabulary}{1.0\textwidth}{| P{3cm} | P{2.7cm} | p{8.5cm} |}
+	\multicolumn{3}{c}{\textbf{Metrics summary}} \\ \hline
+	\textbf{Parameter} & \textbf{Value} & \textbf{How are the values} \\ \hline 
+	Files & 5 & Based on the name of the files and the size of the project, this
+	seems like a good split.\\ \hline
+	Lines & 441 & We can't really say much about this value, as it relies on the
+	logic in the application.\\ \hline
+	Statements & 222 & Same as above, relies on the logic of the application and 
+	how the classes/methods are set up.\\ \hline
+	Percent Branch Statements & 18.5 & Same as above, this relies entirely on
+	the logic of the application, and can be quite hard to abstract away.\\ \hline
+	Method Call Statements & 147 & This might seem somewhat high, based on the number
+	of "Classes and Interfaces" and "Methods per Class".\\ \hline
+	Percent Lines with Comments & 5.2 & According to the Kivat graph, this seems low, 
+	and is an indication of poorly documented code. \\ \hline
+	Classes and Interfaces & 5 & Depends on the logic of the application, hard to
+	say anything about.\\ \hline
+	Methods per Class & 4,20 & Seems like a good number in itself, but if we also
+	account for number of "Classes and Interfaces" as well as "Method Call Statements",
+	this number might indicate that the project could benefit from refactoring methods.\\ \hline
+	Average Statements per Method & 8,14 & This number seems pretty good according
+	to the kivat graph. \\ \hline
+	Name of Most Complex Method & Game.findLetter AndPrintlt() & This just shows us
+	where we can start our initial work for refactoring.\\ \hline
+	Maximum Complexity & 12 & This number seems pretty high, and indicates that the 
+	method in question(findLetterAndPrintIt()) might need some serious refactoring.\\ \hline
+	Maximum Block Depth & 9+ & This is another number which seems rather high, and 
+	indicates that at least one code has an unnecessary amount of nested statements,
+	probably via execution control statements.\\ \hline
+	Average Block Depth & 2,90 & This seems a bit high, and may indicate that the
+	code has for example too few methods or too many if-statements.\\ \hline
+	Average Complexity & 2,95 & Average complexity seems fine, so the high complexity
+	and depth number may indicate that a subset of all methods needs refactoring, since
+	the program overall is fine.\\ \hline
+	Line Number of Most Complex Method & undefined & This is more of a per-file value.\\ \hline
+	Line Number of Deepest Block & undefined & Another per-file value. \\ \hline
 \end{tabulary}
-\newline
-\vspace*{0.5 cm}
-\newline
-Kiviat Graph:
-\vspace {0.08 cm}
-
-\begin{comment}
-\begin{tabulary}{1.0\textwidth}{| C | p{3cm} |}
- \hline
-Comments = 5,2[8-20] & Under \\ \hline
-Methods/Class = 4,20[4-16] & Expected \\ \hline
-Avd Stmts/Method = 8,14[6-12] & Expected \\ \hline
-Max Complexity = 12[2-8] & Over \\ \hline
-Max Depth = 9+[3-7] & Over \\ \hline
-Av Depth = 2,90[1.0-2.2] & Over \\ \hline
-Avg Complexity = 2,95[2.0-4.0] & Expected \\ \hline
-\end{tabulary}
-\end{comment}
+\pagebreak
 
 \includegraphics[width=0.9\textwidth]{Hangman-Kiviat-before.png}
 
+\textbf{Comments on the numbers}\newline
+
 We think that \textit{Comments, Max Complexity, Max Depth and Avg Depth}
-need to change. % TODO: Elaborate on this.
-
-\pagebreak
-\item
-The biggest file by the number of lines is fileReadWriter.java with 219 lines.
-
-
-\item
-The file with the most branches is fileReadWriter.java where the branches stands for
-20,8 % of the file. 
+need to change. Also, \textit{Method Call Statements} and/or \textit{number of methods} might need some work.
+ This is based on the Kivat graph and the numbers overall. 22(5.2\%) lines of comments seems
+  rather low to ensure good documentation, max complexity and max depth of 12 indicates that
+   at least one method does too much work, while average depth indicates that one or more
+    methods contains too many nested statements. The ratio of method call statements(147)
+     to number of methods(4.20 * 5 = 21) also seems somewhat off, and this number(like max
+      complexity/max depth) might indicate that one method does too much work, or that methods
+       for doing some aggregated work is missing.
 
 
-\item
-The file with the most complex code is Game.java. The metrics used for this conclusion is Max complexity and Game.java's score here was 12. 
-
-\end{enumerate}
+To answer the rest of the questions; the biggest file by the number of lines is
+ fileReadWriter.java with 219 lines, the file with the most branches is fileReadWriter.java
+  where the branches stands for 20,8 \% of the file. The file with the most complex code is
+   Game.java. The metrics used for this conclusion is Max complexity and Average Statements
+   per method, where Game.java's score here was 12 and 11.57. 
 
 \subsection{Metrics at file level}
 \vspace {0.10 cm}
@@ -324,27 +319,49 @@ The file with the most complex code is Game.java. The metrics used for this conc
 \end{center}
 \begin{enumerate}
 \item
-How	do	you	interpret	 the	metrics	applied	on	your	file? How	are	 they	different	 the	metrics	you	
-obtained	on	the	whole	project,	compared	with	the	metrics	on	this	file?\newline
-\textbf{We chosed FileReadWriter.java}
-We interpret FileReadWriter as less complex and with lower depth than
-the whole project. Also the comments on this file looks greater than in
-the entire project. The balance of the "green values" are also more balanced for Avg complexity
-and Methods/class than in the project. 
+How do you interpret the metrics applied on your file? How are they different the metrics you
+obtained on the whole project, compared with the metrics on this file?\newline
+\textbf{We chose FileReadWriter.java}\newline
+We interpret FileReadWriter as more complex then the average for the project, as pr the 
+numbers for average complexity and average depth. Its number for max complexity and
+max depth is also pretty high. At the same time, it looks like it's more commented then
+the average of the project, which is good, and with another look at the numbers, it contains 
+almost all of the comments in this project. But the average complexity, average statements
+pr method and the number of method seems well balanced.
+
 
 %Project vs FileReadWriter.java
 
 \item
 Would	you	refactor	(re-write)	any	of	the	methods you	have	in	this	file?	
 
-Most definitly:
+\begin{tabulary}{0.5\textwidth}{| c | c | c | c | c |}
+\hline
+\textbf{Method names} &	\textbf{Complexity} & \textbf{Statements}
+ & \textbf{Max Depth} & \textbf{Calls} \\ \hline
+
+addRecords()				& 2 & 6 & 3 & 3 \\ \hline
+closeFileFromReading() 		& 1 & 1 & 2 & 1 \\ \hline
+closeFileFromWriting() 		& 3 & 5 & 4 & 3 \\ \hline
+nop() 				  		& 1 & 15 & 10 & 15 \\ \hline
+oldReadRecords()		  	& 1 & 5 & 2 & 5 \\ \hline
+openFiletoRead()			& 3 & 5 & 5 & 2 \\ \hline
+openFileToWite()			& 2 & 3 & 3 & 2 \\ \hline
+printAndSortScoreBoard()	& 10 & 24 & 8 & 32 \\ \hline
+readRecords()				& 6 & 13 & 7 & 8 \\ \hline
+tryCloseFileFromReading()	& 3 & 7 & 4 & 4 \\ \hline
+\end{tabulary}
+
+Based on the numbers overall and for each method, most definitely:
 \begin{enumerate}
 \item
-closeFileFromReading() because it only calls another method, namely: tryCloseFileFromReading so there is no need for closeFileFromReading.
+closeFileFromReading() because it only has one statement, which looks like a function call.
+Its name might also indicate that it does the same as tryCloseFileFromReading().
 
 \item
-nop() this method does nothing productive. Its not called from any other method in the class so it isn't used. And it is not possible to use with a reference since it is private.  It only calls System.out.println(true);
-and outputs that 15 times. So we can erase this one as well. 
+nop() has 15 statements, whom are all system calls(based on the number), and a max depth
+of 10. Based on the numbers, this might be a rather useless method, unless it contains
+some sort of crazy control flow.
 
 \item
 oldReadRecords() calls readRecords() 5 times. But for no apperent reason.
