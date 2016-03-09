@@ -361,25 +361,32 @@ Its name might also indicate that it does the same as tryCloseFileFromReading().
 \item
 nop() has 15 statements, whom are all system calls(based on the number), and a max depth
 of 10. Based on the numbers, this might be a rather useless method, unless it contains
-some sort of crazy control flow.
+some sort of control flow, but based on the number of methods and its name, it is highly unlikely.
 
 \item
+oldReadRecords() might be deprecated method based on its name, since another method called addRecords() exists. It also contains only 5 statements, where all are system calls, so this is another method where its relevance is doubtful at best.
+\begin{comment}
 oldReadRecords() calls readRecords() 5 times. But for no apperent reason.
 This is undefined behavior because it doesnt check of many records that eventually
 would've been stored. It has the same problem as nop(), it is private and nothing else in this class is using it so it is rubbish.
+\end{comment}
 
+\item
+printAndSortScorebard() has more calls then statements, which might indicate that it's not optimized or does something rather clunky.
 
 \end{enumerate}
 
+Do note that this list is only based on the metrics retrieved by SourceMonitor, and only contains those that clearly stood out. When the optimization begins, other methods may be touched if they are found to contain unusable/unnecessary code, badly optimized code etc.
 
 \end{enumerate}
 %Requirement 3
 \section{\textit{Requirement 3} -Improvements based on metrics}
 
 \subsection{Metrics at project level that needs improvment}
+Comments, Max Complexity, Max Depth and Avg Depth are metrics that really need to be improved, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
 
 \subsection{List of improved/refactored code}
-%Both list of code files, and link to github public repo
+%Both list of code files, link to github public repo and specific cases
 
 \subsection{New metrics at project level vs old}
 
