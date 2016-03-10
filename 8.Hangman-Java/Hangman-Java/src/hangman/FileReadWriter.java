@@ -76,7 +76,7 @@ public class FileReadWriter {
 				}
 			}
 		}catch (EOFException ex) {
-			System.err.println("No Players object reside in the file 'players.ser'")
+			System.err.println("No Players object reside in the file 'players.ser'");
 			ex.printStackTrace();
 		} catch (ClassNotFoundException classNotFoundException) {
 			System.err.println("Cannot find class Players.java");
