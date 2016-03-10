@@ -4,9 +4,9 @@ public class HangmanTets {
 
 	public static void main(String[] args) {
 
-		Game myGame = new Game(false);
+		Game myGame = new Game();
 
-		myGame.displayMenu();
+		myGame.runHangman();
 
 		
 	}
