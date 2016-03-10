@@ -2,7 +2,7 @@ package hangman;
 
 import java.io.Serializable;
 
-public class Players implements Serializable{
+public class Players implements Serializable, Comparable<Players>{
 	
 	private String name;
 	private int scores;
@@ -23,6 +23,8 @@ public class Players implements Serializable{
 		return scores;
 	}
 
-	
-
+	@Override
+	public int compare(Players p1, Players p2) {
+		return p1.getScores()-p2.getScores();
+	}
 }
