@@ -391,6 +391,17 @@ Comments, Max Complexity, Max Depth and Avg Depth are metrics that really need t
 \subsection{New metrics at project level vs old}
 
 \subsection{New metrics at file level vs old}
+In FileReadWriter.java
+Sourcemonitor can´t handle nested try/catch statements in java. Therefor
+the calculations from souce monitor in Avg Stmts/methods or 
+avg Complexity cannot be accounted for. 
+In FileReadWriter.java we have 20 statements and 3 methods which 
+rounded up is 6.7 statements per method.
+
+Sourcemonitor also cannot handle try-with-resources
+which it interprets as classes. Hence the metrics for methods/class
+is invalid. 
+The correct result is 3 methods per class.
 
 \section{Conclusion}
 make a couple of remarks about how easy or not it was for you to maintain the code
