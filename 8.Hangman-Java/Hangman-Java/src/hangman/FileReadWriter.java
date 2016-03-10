@@ -1,219 +1,121 @@
 package hangman;
 
-import java.io.EOFException;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class FileReadWriter {
-	private ObjectOutputStream output;
-	private ObjectInputStream input;
 	ArrayList<Players> myArr = new ArrayList<Players>();
 
-	public void openFileToWite() {
-		try // open file
-		{
-			output = new ObjectOutputStream(new FileOutputStream("players.ser",
-					true));
+
+	//######################## writing to file start ##########################################
+	/*
+	* Opens ObjectOutputStream for writing, adds records to file with ArrayList<Players> as the object written.
+	* Since ArrayList is dynamic but still serializable it is much more convenient than just wring one and one
+	* Players object, because then we would also need a number for how many players.java were in the list in addition
+	* to every object.
+	* try with-resources closes streams automatically and in the contract they also flushes them before closing.
+	*/
+	public void openAddRecordsandCloseFiletoWrite (int score, String name){
+		try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream("players.ser"))){
+			addRecords(output, score, name);
 		} catch (IOException ioException) {
 			System.err.println("Error opening file.");
+			ioException.printStackTrace();
 		}
 	}
 
-	// add records to file
-	public void addRecords(int scores, String name) {
-		Players players = new Players(name, scores); // object to be written to
-														// file
-
-		try { // output values to file
-			output.writeObject(players); // output players
+	//If game has been runned > 1 times before myArr will contain these players from the call on readRecords from last round.
+	public void addRecords(ObjectOutputStream output, int scores, String name) {
+		Players players = new Players(name, scores);
+		myArr.add(players);
+		try { 
+			output.writeObject(myArr);
 		} catch (IOException ioException) {
 			System.err.println("Error writing to file.");
-			return;
 		}
 	}
+	//######################## writing to file end ########################
 
-	public void closeFileFromWriting() {
-		try // close file
-		{
-			if (output != null){
-			  output.close();
-			}
-		} catch (IOException ioException) {
-			//show error
-			System.err.println("Error closing file.");
 
-			{
-				//exit
-				System.exit(1);
-			}
-		}
-	}
 
-	public void openFiletoRead() {
-		try {
-			{
-				if(true) {
-					input = new ObjectInputStream(new FileInputStream("players.ser"));
-				}
-			}
+	/*
+	* Opens players.ser and and calls readObject on ObjectInputStream which then returns the
+	* ArrayList<Players> with arbitrary Players.
+	* As with openAddRecordsandCloseFiletoWrite() it closes automatically.
+	*/
+	//######################## reading from file start ########################
+	public void openReadandWriteFileToRead() {
+		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("players.ser"))){
+			readRecords(input);
 		} catch (IOException ioException) {
 			System.err.println("Error opening file.");
 		}
 	}
 
-	public void readRecords() {
-		Players records;
-
-		try // input the values from the file
-		{
+	public void readRecords(ObjectInputStream input) {
+		try{
+			int count = 0;
 			Object obj = null;
+			obj = input.readObject();
 
-			while (!(obj = input.readObject()).equals(null)) {
-				if (obj instanceof Players) {
-					records = (Players) obj;{
-						myArr.add(records);{
-							System.out.printf("DEBUG: %-10d%-12s\n",
-									records.getScores(), records.getName());
-						}
-					
-					}
+			if(obj instanceof ArrayList){
+				myArr = (ArrayList<Players>) obj;
+				//System.out.println("\nactually reads streams from file\n");
+			}else{
+				System.err.println("players.ser corrupted, deleting it...");
+				File f = new File("players.ser");
+				try{
+					if(f.exists())
+						f.delete();
+				}catch (SecurityException secE){
+					System.err.println("File is restricted, please overwrite it with admin-rights");
+					secE.printStackTrace();
+					System.exit(1);
 				}
 			}
-
-			/*
-			 * while (true) { records = (Players) input.readObject();
-			 * myArr.add(records); System.out.printf("DEBUG: %-10d%-12s\n",
-			 * records.getScores(), records.getName()); } // end while
-			 */
-			} // end try
-		catch (EOFException endOfFileException) {
-			return; // end of file was reached
+		}catch (EOFException ex) {
+			System.err.println("No Players object reside in the file 'players.ser'")
+			ex.printStackTrace();
 		} catch (ClassNotFoundException classNotFoundException) {
-			System.err.println("Unable to create object.");
-		} catch (IOException ioException) {
+			System.err.println("Cannot find class Players.java");
+		} catch (InvalidClassException invalidClass){
+			System.err.println("Serialization failed for class Players.java");
+		} catch (StreamCorruptedException streamCorrupt) {
+			System.err.println("Stream corrupted - Control information in the stream is inconsistent."); 
+		}catch (OptionalDataException optionalData){
+			System.err.println("Primitive data was found in the stream instead of objects.");
+		}catch (IOException ioException) {
+			ioException.printStackTrace();
 			System.err.println("Error during reading from file.");
 		}
-	}
+	} 
+	//######################## reading from file end ########################
 
-	public void closeFileFromReading() {
-		tryCloseFileFromReading();
-	}
 
 	public void printAndSortScoreBoard() {
-		Players temp;
-		int n = myArr.size();
-		for (int pass = 1; pass < n; pass++) {
-
-			for (int i = 0; i < n - pass; i++) {
-				if (myArr.get(i).getScores() > myArr.get(i + 1).getScores()) {
-
-					temp = myArr.get(i);
-					{
-						myArr.set(i, myArr.get(i + 1));
-						{
-							myArr.set(i + 1, temp);
-						}
-					}
-				}
-			}
-		}
+		Collections.sort(myArr,new ScoreComparator());
 
 		System.out.println("Scoreboard:");
-		for (int i = 0; i < myArr.size(); i++) {
-			System.out.printf("%d. %s ----> %d", i, myArr.get(i).getName(),
-					myArr.get(i).getScores());
-		}
-		
-		boolean evaluate=false;//new Evaluator().Asses();
-		if(evaluate){
-			Players temp1;
-			int n1 = myArr.size();
-			for (int pass = 1; pass < n1; pass++) {
-
-				for (int i = 0; i < n1 - pass; i++) {
-					if (myArr.get(i).getScores() > myArr.get(i + 1).getScores()) {
-
-						temp1 = myArr.get(i);
-						{
-							myArr.set(i, myArr.get(i + 1));
-							{
-								myArr.set(i + 1, temp1);
-							}
-						}
-					}
-				}
-			}
-
-			System.out.println("Scoreboard:");
-			for (int i = 0; i < myArr.size(); i++) {
-				System.out.printf("%d. %s ----> %d", i, myArr.get(i).getName(),
-						myArr.get(i).getScores());
-			}
+		int position = 1;
+		for(Players p: myArr){
+			System.out.printf("%d. %s ----> %d\n", position, p.getName(), p.getScores());
+			position++;
 		}
 	}
-
-	private void tryCloseFileFromReading()
-	{
-		try {
-			if (input != null){
-				input.close();
-			}
-			{
-				// exit
-				System.exit(0);
-			}
-		} catch (IOException ioException) {
-			System.err.println("Error closing file.");
-			System.exit(1);
-		}
-	}
-
-	public void nop()
-	{
-		System.out.println(true);
-		{
-			System.out.println(true);
-			{
-				System.out.println(true);
-				{
-					System.out.println(true);
-					{
-						System.out.println(true);
-						{
-							System.out.println(true);
-							{
-								System.out.println(true);
-								{
-									System.out.println(true);
-									{
-										System.out.println(true);
-										System.out.println(true);
-										System.out.println(true);
-										System.out.println(true);
-										System.out.println(true);
-										System.out.println(true);
-										System.out.println(true);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	public void oldReadRecords()
-	{
-		readRecords();
-		readRecords();
-		readRecords();
-		readRecords();
-		readRecords();
+	
+	public static class ScoreComparator implements Comparator<Players> {
+    	@Override
+	    public int compare(Players p1, Players p2) {
+	    	return p1.getScores()-p2.getScores();
+	    }
 	}
 
 }
+
+
+	//TODO:
+	/*
+	* 1. Check if any Exceptions should make the program close.
+	*/

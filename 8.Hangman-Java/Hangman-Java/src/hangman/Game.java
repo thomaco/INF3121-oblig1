@@ -4,77 +4,76 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-	private static final String[] wordForGuesing = { "computer", "programmer",
-			"software", "debugger", "compiler", "developer", "algorithm",
-			"array", "method", "variable" };
+    private static final String[] wordForGuesing = { "computer", "programmer",
+            "software", "debugger", "compiler", "developer", "algorithm",
+            "array", "method", "variable" };
 
-	private String guessWord;
-	private FileReadWriter filerw;
+    private String guessWord;
+    private FileReadWriter filerw;
     private boolean isHelpUsed;
     private StringBuffer dashBuff;
 
     //Constructor
-	public Game() {
-		filerw = new FileReadWriter();
-	}
+    public Game() {
+        filerw = new FileReadWriter();
+    }
 
     //Sets the variables and start the guess-loop
-	public void runHangman() {
+    public void runHangman() {
         StringBuilder dashedWord;
         guessWord = wordForGuesing[new Random().nextInt(9)];
         isHelpUsed = false;
         dashedWord = new StringBuilder(new String(new char[guessWord.length()]).replace('\0', '_'));
         dashBuff = new StringBuffer(dashedWord);
-		System.out.println("Welcome to �Hangman� game. Please, try to guess my secret word.\n"
-				+ "Use 'TOP' to view the top scoreboard, 'RESTART' to start a new game,"
-				+ "'HELP' to cheat and 'EXIT' to quit the game.");
+        System.out.println("Welcome to �Hangman� game. Please, try to guess my secret word.\n"
+                + "Use 'TOP' to view the top scoreboard, 'RESTART' to start a new game,"
+                + "'HELP' to cheat and 'EXIT' to quit the game.");
 
-		gameLoop();
-	}
+        gameLoop();
+    }
 
     //Method containing the main game logic with loops and end-of-game message
-	private void gameLoop() {
-		String letter;
-		int mistakes = 0;
+    private void gameLoop() {
+        String letter;
+        int mistakes = 0;
 
         //Loops until word is complete
-		do {
+        do {
             letter = inputLoop();
 
-			int counter = replaceDashes(letter);
+            int counter = replaceDashes(letter);
 
-			if (counter == 0) {
-				++mistakes;
-				System.out.printf("Sorry! There are no unrevealed letters \'%s\'. \n", letter);
-			} else {
-				System.out.printf("Good job! You revealed %d letter(s).\n", counter);
-			}
+            if (counter == 0) {
+                ++mistakes;
+                System.out.printf("Sorry! There are no unrevealed letters \'%s\'. \n", letter);
+            } else {
+                System.out.printf("Good job! You revealed %d letter(s).\n", counter);
+            }
 
-		} while (!dashBuff.toString().equals(guessWord));
+        } while (!dashBuff.toString().equals(guessWord));
 
         //Word complete, display end of game message
         System.out.println("You won with " + mistakes + " mistake(s).");
         System.out.println("The secret word is: " + printDashes(dashBuff) + ".");
-		if (!isHelpUsed) {
+        if (!isHelpUsed) {
 
-			System.out.println("Please enter your name for the top scoreboard:");
-			Scanner input = new Scanner(System.in);
-			String playerName = input.next();
+            System.out.println("Please enter your name for the top scoreboard:");
+            Scanner input = new Scanner(System.in);
+            String playerName = input.next();
 
+            filerw.openAddRecordsandCloseFiletoWrite(mistakes, playerName);
+            filerw.openReadandWriteFileToRead();
+            filerw.printAndSortScoreBoard();
+        
 
-			filerw.openFileToWite();
-			filerw.addRecords(mistakes, playerName);
-			filerw.closeFileFromWriting();
-			sortAndPrintScore();
+        } else {
+            System.out.println("But since you cheated. You are not allowed to enter into the scoreboard.");
+        }
 
-		} else {
-			System.out.println("But since you cheated. You are not allowed to enter into the scoreboard.");
-		}
-
-		// restart the game
+        // restart the game
         runHangman();
 
-	}
+    }
 
     //Loop which handles input, returns a letter
     private String inputLoop() {
@@ -99,37 +98,35 @@ public class Game {
     }
 
     //Check if String word is a command, and executes action if it is
-	private String commandCheckAndExecute(String word) {
+    private String commandCheckAndExecute(String word) {
         if(word.equals(Command.help.toString())) {
             isHelpUsed = true;
             int i = dashBuff.indexOf("_");
             word = String.valueOf(guessWord.charAt(i));
         } else if (word.equals(Command.restart.toString())) {
             runHangman();
-		} else if (word.equals(Command.top.toString())) {
+        } else if (word.equals(Command.top.toString())) {
             sortAndPrintScore();
             runHangman();
-		} else if (word.equals(Command.exit.toString())) {
-			System.exit(1);
-		}
+        } else if (word.equals(Command.exit.toString())) {
+            System.exit(1);
+        }
         return word;
-	}
+    }
 
     //Wrapper for turning a StringBuffer word into a space-separated
-	private String printDashes(StringBuffer word) {
-		String toDashes = "";
-		for (int i = 0; i < word.length(); i++) {
-			toDashes += (" " + word.charAt(i));
-		}
-		return toDashes;
+    private String printDashes(StringBuffer word) {
+        String toDashes = "";
+        for (int i = 0; i < word.length(); i++) {
+            toDashes += (" " + word.charAt(i));
+        }
+        return toDashes;
 
-	}
+    }
 
     //Wrapper for reading and printing scores
     private void sortAndPrintScore() {
-        filerw.openFiletoRead();
-        filerw.readRecords();
-        filerw.closeFileFromReading();
+        filerw.openReadandWriteFileToRead();
         filerw.printAndSortScoreBoard();
     }
 
