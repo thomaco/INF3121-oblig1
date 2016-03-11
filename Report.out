@@ -6,8 +6,9 @@
 \BOOKMARK [2][-]{subsection.2.1}{Metrics at project level}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.2}{Metrics at file level}{section.2}% 7
 \BOOKMARK [1][-]{section.3}{Requirement 3 -Improvements based on metrics}{}% 8
-\BOOKMARK [2][-]{subsection.3.1}{Metrics at project level that needs improvment}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.2}{List of improved/refactored code}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.1}{Identified metrics at project level that needs improvment}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Examples of refactored/improved code}{section.3}% 10
 \BOOKMARK [2][-]{subsection.3.3}{New metrics at project level vs old}{section.3}% 11
 \BOOKMARK [2][-]{subsection.3.4}{New metrics at file level vs old}{section.3}% 12
-\BOOKMARK [1][-]{section.4}{Conclusion}{}% 13
+\BOOKMARK [2][-]{subsection.3.5}{Github link}{section.3}% 13
+\BOOKMARK [2][-]{subsection.3.6}{Remarks and conclusion}{section.3}% 14

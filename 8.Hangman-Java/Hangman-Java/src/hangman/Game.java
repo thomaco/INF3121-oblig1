@@ -4,6 +4,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
+	
+    public static void main(String[] args) {
+        Game myGame = new Game();
+        myGame.runHangman(); 
+    }
+
     private static final String[] wordForGuesing = { "computer", "programmer",
             "software", "debugger", "compiler", "developer", "algorithm",
             "array", "method", "variable" };
@@ -91,7 +97,7 @@ public class Game {
                 letter = "-";
                 System.out.println("Letter already guessed.");
             }
-            letter = commandCheckAndExecute(letter);
+            letter = commandCheckAndExecute(letter.toLowerCase());
         } while (!letter.matches("[a-z]"));
 
         return letter;

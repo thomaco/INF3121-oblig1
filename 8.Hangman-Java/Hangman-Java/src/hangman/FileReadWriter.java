@@ -37,6 +37,7 @@ public class FileReadWriter {
 	* ArrayList<Players> with arbitrary Players.
 	* As with openAddRecordsandCloseFiletoWrite() it closes automatically.
 	*/
+	@SuppressWarnings("unchecked")
 	public void openAndReadfromFile() {
 		try(ObjectInputStream input = new ObjectInputStream(new FileInputStream("players.ser"))){
 			try{

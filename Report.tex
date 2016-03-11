@@ -9,7 +9,6 @@
 \usepackage{listings}
 \usepackage{graphicx}
 
-%\usepackage{hyperref}
 %\usepackage{listings}
 %\usepackage[cm]{fullpage}
 \renewcommand{\labelenumii}{\arabic{enumii}.}
@@ -336,9 +335,8 @@ pr method and the number of method seems well balanced.
 Would	you	refactor	(re-write)	any	of	the	methods you	have	in	this	file?	
 
 \begin{tabulary}{0.5\textwidth}{| c | c | c | c | c |}
-\hline
-\textbf{Method names} &	\textbf{Complexity} & \textbf{Statements}
- & \textbf{Max Depth} & \textbf{Calls} \\ \hline
+ \hline
+\textbf{Method names} &	\textbf{Complexity} & \textbf{Statements} & \textbf{Max Depth} & \textbf{Calls} \\ \hline
 
 addRecords()				& 2 & 6 & 3 & 3 \\ \hline
 closeFileFromReading() 		& 1 & 1 & 2 & 1 \\ \hline
@@ -382,30 +380,126 @@ Do note that this list is only based on the metrics retrieved by SourceMonitor, 
 %Requirement 3
 \section{\textit{Requirement 3} -Improvements based on metrics}
 
-\subsection{Metrics at project level that needs improvment}
-Comments, Max Complexity, Max Depth and Avg Depth are metrics that really need to be improved, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
+\subsection{Identified metrics at project level that needs improvment}
+\textbf{Comments, Max Complexity, Max Depth and Avg Depth} are metrics that really need to be improved, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
 
-\subsection{List of improved/refactored code}
+\subsection{Examples of refactored/improved code}
 %Both list of code files, link to github public repo and specific cases
+\begin{enumerate}
+\item
+\textbf{FileReadWriter.java}
+FileReadWriter has two which are never called and therefor removed nop() and oldReadRecords()
+respectively.
+closeFileFromReading() just calls tryCloseFileFromReading() so that one is removed.
+printAndSortScoreBoard() tries to print out results two times and sort the list two times.
+The whole method is changed and now only contains a loop of the ArrayList myArr which is sorted
+with collections.sort(). This works since Players.java has implemented Comparable<Players>.
+And instead of having one method to open read/write and close I refactored all of these methods
+sequences of operations to one for open, writing and closing and the same for open reading and closing. This is mainly achieved due to the use of try-with-resources which saves a lot of space and
+makes closing method unnecessary in the whole file. 
+\textbf{Example on opening file, writing to it and closing:\newline}
+\hspace*{-2.0cm}\begin{tabulary}{0.5\textwidth}{| c | c |}
+ \hline
+ Before & after \\ \hline
+\includegraphics[scale=0.4]{FileReadWriter-EXAMPLE-BEFORE.png} & \includegraphics[scale=0.4]{FileReaderWriter-EXAMPLE-AFTER.png} \\ \hline
+\end{tabulary}
 
-\subsection{New metrics at project level vs old}
+\item
+\textbf{Players.java}
+Comments are added for explaining the implementations for Serializable and Comparable<Players>.
+The method CompareTo is overrided so sorting can be done with the trivial Collections.sort() method. \textit{Why invent the wheel if is already exists?} % du kan fjerne denne om du vil, men tror Raluca kanskje setter pris på den. :p
+\item
+\textbf{HangmanTets.java}
+This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that actually does practically nothing.
+\item
+\textbf{Game.java}
+First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game.
+We also move
 
-\subsection{New metrics at file level vs old}
-In FileReadWriter.java
-Sourcemonitor can't handle nested try/catch statements in java. Therefor
-the calculations from souce monitor in Avg Stmts/methods or 
-avg Complexity cannot be accounted for. 
+\item% Er du uenig? Vi kan fint flytte den inn Game.java og slette hele filen?
+% http://www.coderanch.com/t/385256/java/java/Package-Enums
+% eneste nyttige jeg fant om det.
+\textbf{Commands.java}
+We decided to keep this in it's own file to have more readable code. Although Game.java is the only one the commands. Having it in it's own file empowers the OO-programming scheme.
+
+\end{enumerate}
+
+
+\subsection{New metrics at project level vs old} % just use kiviat graphs here?
+\hspace*{-2.6cm}\begin{tabulary}{0.5\textwidth}{| c | c |}
+ \hline
+Without filereadwriter.java & With filereadwriter.java \\ \hline
+\includegraphics[scale=0.5]{Project-after-with-filereadwriter.png} & \includegraphics[scale=0.5]{Kiviat-project-without-filereadwriter.png} \\ \hline
+\end{tabulary}
+The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it alo misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
+\textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
+
+\subsection{New metrics at file level vs old} % just use kiviat graphs here?
+\begin{enumerate}
+\item
+\textbf{FileReadWriter.java}
+In FileReadWriter.java:\newline
+\textit{Avg Stmts/methods Methods/class} must be calculated individually, due to the lack
+of support for newer datastructures.
+
 In FileReadWriter.java we have 20 statements and 3 methods which 
-rounded up is 6.7 statements per method.
+rounded up is 6.7 statements per method and 3 methods per class.\newline
+\includegraphics[scale=0.5]{Kiviat-filereadwriter-after.png}\newline
 
-Sourcemonitor also cannot handle try-with-resources
-which it interprets as classes. Hence the metrics for methods/class
-is invalid. 
-The correct result is 3 methods per class.
+\item
+\textbf{Game.java}
 
-\section{Conclusion}
+\item
+\textbf{Players.java} % gidder du å legge inn en kiviat graf her? hakke tilgang til windows akkurat nå.
+
+
+\item%remove this if you choose not to have it in a separate file
+\textbf{Command.java}
+
+\end{enumerate}
+
+
+\subsection{Github link}
+\href{https://github.com/thomaco/INF3121-oblig1}{\textbf{https://github.com/thomaco/INF3121-oblig1}}
+
+\subsection{Remarks and conclusion}% skal renskrive det her imorgen!
+\textbf{Sourcemonitor calculation\newline}
+Sourcemonitor doesn't count statements that are separated
+by try\\catch or nested try\\catches even though they are guaranteed to be
+executed. 
+Sourcemonitor also struggles with newly implemented 'syntatic' sugars and so forth like
+try with resources. We have to take all of this into consideration when reading these numbers.
+This is also the reason why we chose to show the result of the new project both with and without it.
+Also this is a decision the developers of Sourcemonitor has taken and as long as you are aware of this fact and consider this you will be fine. \newline
+When sourcemonitor caluclates your comments it only calculated how many lines are either \textbackslash \textbackslash or \textbackslash* * *\textbackslash not if there is some text there. I mean this misguides especially if one is a fan of the neat \textbackslash* * *\textbackslash syntax for writing code.
+
+
+\textbf{Explaination of FileReadWriter\newline}
+Avg Stmts/methods vs Methods/class
+chosed Stmts/methods since Methods/class
+also would've increased avg depth over 2.0
+so basically instead of having two over we only have one.
+The problem here is that if we fulfill Stmts/methods then Methods/class
+goes < 4 but if we satisfy Methods/class then Stmts/methods < 4.33.
+
+Either 3 or 5 methods for FileReadWriter.java also per class
+with only 3-4 statements in each or 3 methods with 7 statements
+in each method. 
+
+So in order to get the metrics inside the green area we would have to
+write meaningless code statements in order to get our statement per method up
+our have extra methods to get that ratio up which isn't particulary useful. Our
+methods contains exactly what they need to contain in order to do their job. Sourcemonitor
+thinks this is too small some places, but those numbers are only omnious. 
+This is the time to keep in mind that Sourcemonitor only is \textit{indicative}
+and not conclusive, actually far from it. It is only a small part of the analytics
+that should be done when analyzing code for optimization. 
+
+
+\begin{comment}
 make a couple of remarks about how easy or not it was for you to maintain the code
 (to modify it in order to improve it). Is there anything that you would have done differently on
 the ini'al code to make its maintenance easier?
+\end{comment}
 
 \end{document}

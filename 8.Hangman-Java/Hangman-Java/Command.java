@@ -1,5 +1,5 @@
 package hangman;
 
-enum Command {
+protected enum Command {
 		restart, top, exit, help;
 	}
