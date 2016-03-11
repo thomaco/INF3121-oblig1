@@ -321,16 +321,14 @@ To answer the rest of the questions; the biggest file by the number of lines is
 How do you interpret the metrics applied on your file? How are they different the metrics you
 obtained on the whole project, compared with the metrics on this file?\newline
 \textbf{We chose FileReadWriter.java}\newline
-We interpret FileReadWriter as more complex then the average for the project, as pr the 
-numbers for average complexity and average depth. Its number for max complexity and
+We interpret FileReadWriter as more complex then the average for the project, as the 
+numbers for average complexity and average depth are higher. Its number for max complexity and
 max depth is also pretty high. At the same time, it looks like it's more commented then
 the average of the project, which is good, and with another look at the numbers, it contains 
 almost all of the comments in this project. But the average complexity, average statements
 pr method and the number of method seems well balanced.
 
-
 %Project vs FileReadWriter.java
-
 \item
 Would	you	refactor	(re-write)	any	of	the	methods you	have	in	this	file?	
 
@@ -386,41 +384,41 @@ Do note that this list is only based on the metrics retrieved by SourceMonitor, 
 \subsection{Examples of refactored/improved code}
 %Both list of code files, link to github public repo and specific cases
 \begin{enumerate}
-\item
-\textbf{FileReadWriter.java}
-FileReadWriter has two which are never called and therefor removed nop() and oldReadRecords()
-respectively.
-closeFileFromReading() just calls tryCloseFileFromReading() so that one is removed.
-printAndSortScoreBoard() tries to print out results two times and sort the list two times.
-The whole method is changed and now only contains a loop of the ArrayList myArr which is sorted
-with collections.sort(). This works since Players.java has implemented Comparable<Players>.
-And instead of having one method to open read/write and close I refactored all of these methods
-sequences of operations to one for open, writing and closing and the same for open reading and closing. This is mainly achieved due to the use of try-with-resources which saves a lot of space and
-makes closing method unnecessary in the whole file. 
-\textbf{Example on opening file, writing to it and closing:\newline}
-\hspace*{-2.0cm}\begin{tabulary}{0.5\textwidth}{| c | c |}
- \hline
- Before & after \\ \hline
-\includegraphics[scale=0.4]{FileReadWriter-EXAMPLE-BEFORE.png} & \includegraphics[scale=0.4]{FileReaderWriter-EXAMPLE-AFTER.png} \\ \hline
-\end{tabulary}
+	\item
+	\textbf{FileReadWriter.java}
+	FileReadWriter has two which are never called and therefor removed nop() and oldReadRecords()
+	respectively.
+	closeFileFromReading() just calls tryCloseFileFromReading() so that one is removed.
+	printAndSortScoreBoard() tries to print out results two times and sort the list two times.
+	The whole method is changed and now only contains a loop of the ArrayList myArr which is sorted
+	with collections.sort(). This works since Players.java has implemented Comparable<Players>.
+	And instead of having one method to open read/write and close I refactored all of these methods
+	sequences of operations to one for open, writing and closing and the same for open reading and closing. This is mainly achieved due to the use of try-with-resources which saves a lot of space and
+	makes closing method unnecessary in the whole file. 
+	\textbf{Example from FileReadwriter \textit{opening file, writing to it and closing} :\newline}
+	\hspace*{-2.0cm}\begin{tabulary}{0.5\textwidth}{| c | c |}
+	 \hline
+	 Before & after \\ \hline
+	\includegraphics[scale=0.4]{FileReadWriter-EXAMPLE-BEFORE.png} & \includegraphics[scale=0.4]{FileReaderWriter-EXAMPLE-AFTER.png} \\ \hline
+	\end{tabulary}
 
-\item
-\textbf{Players.java}
-Comments are added for explaining the implementations for Serializable and Comparable<Players>.
-The method CompareTo is overrided so sorting can be done with the trivial Collections.sort() method. \textit{Why invent the wheel if is already exists?} % du kan fjerne denne om du vil, men tror Raluca kanskje setter pris på den. :p
-\item
-\textbf{HangmanTets.java}
-This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that actually does practically nothing.
-\item
-\textbf{Game.java}
-First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game.
-We also move
+	\item
+	\textbf{Players.java}
+	Comments are added for explaining the implementations for Serializable and Comparable<Players>.
+	The method CompareTo is overrided so sorting can be done with the trivial Collections.sort() method. \textit{Why invent the wheel if is already exists?} % du kan fjerne denne om du vil, men tror Raluca kanskje setter pris på den. :p
+	\item
+	\textbf{HangmanTets.java}
+	This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that actually does practically nothing.
+	\item
+	\textbf{Game.java}
+	First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game.
+	We also move
 
-\item% Er du uenig? Vi kan fint flytte den inn Game.java og slette hele filen?
-% http://www.coderanch.com/t/385256/java/java/Package-Enums
-% eneste nyttige jeg fant om det.
-\textbf{Commands.java}
-We decided to keep this in it's own file to have more readable code. Although Game.java is the only one the commands. Having it in it's own file empowers the OO-programming scheme.
+	\item% Er du uenig? Vi kan fint flytte den inn Game.java og slette hele filen?
+	% http://www.coderanch.com/t/385256/java/java/Package-Enums
+	% eneste nyttige jeg fant om det.
+	\textbf{Commands.java}
+	We decided to keep this in it's own file to have more readable code. Although Game.java is the only one the commands. Having it in it's own file empowers the OO-programming scheme.
 
 \end{enumerate}
 
@@ -430,31 +428,33 @@ We decided to keep this in it's own file to have more readable code. Although Ga
  \hline
 Without filereadwriter.java & With filereadwriter.java \\ \hline
 \includegraphics[scale=0.5]{Project-after-with-filereadwriter.png} & \includegraphics[scale=0.5]{Kiviat-project-without-filereadwriter.png} \\ \hline
+\vspace {0.10 cm}
 \end{tabulary}
+
 The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it alo misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
 \textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
 
 \subsection{New metrics at file level vs old} % just use kiviat graphs here?
 \begin{enumerate}
-\item
-\textbf{FileReadWriter.java}
-In FileReadWriter.java:\newline
-\textit{Avg Stmts/methods Methods/class} must be calculated individually, due to the lack
-of support for newer datastructures.
+	\item
+	\textbf{FileReadWriter.java}
+	In FileReadWriter.java:\newline
+	\textit{Avg Stmts/methods Methods/class} must be calculated individually, due to the lack
+	of support for newer datastructures.
 
-In FileReadWriter.java we have 20 statements and 3 methods which 
-rounded up is 6.7 statements per method and 3 methods per class.\newline
-\includegraphics[scale=0.5]{Kiviat-filereadwriter-after.png}\newline
+	In FileReadWriter.java we have 20 statements and 3 methods which 
+	rounded up is 6.7 statements per method and 3 methods per class.\newline
+	\includegraphics[scale=0.5]{Kiviat-filereadwriter-after.png}\newline
 
-\item
-\textbf{Game.java}
+	\item
+	\textbf{Game.java}
 
-\item
-\textbf{Players.java} % gidder du å legge inn en kiviat graf her? hakke tilgang til windows akkurat nå.
+	\item
+	\textbf{Players.java} % gidder du å legge inn en kiviat graf her? hakke tilgang til windows akkurat nå.
 
 
-\item%remove this if you choose not to have it in a separate file
-\textbf{Command.java}
+	\item%remove this if you choose not to have it in a separate file
+	\textbf{Command.java}
 
 \end{enumerate}
 
@@ -462,7 +462,7 @@ rounded up is 6.7 statements per method and 3 methods per class.\newline
 \subsection{Github link}
 \href{https://github.com/thomaco/INF3121-oblig1}{\textbf{https://github.com/thomaco/INF3121-oblig1}}
 
-\subsection{Remarks and conclusion}% skal renskrive det her imorgen!
+\subsection{Remarks and Conclusion}% skal renskrive det her imorgen!
 \textbf{Sourcemonitor calculation\newline}
 Sourcemonitor doesn't count statements that are separated
 by try\\catch or nested try\\catches even though they are guaranteed to be
