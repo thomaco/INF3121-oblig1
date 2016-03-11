@@ -12,9 +12,6 @@ public class Players implements Serializable, Comparable<Players>{
 		this.scores = scores;
 	}
 	
-	
-	
-	
 	public String getName() {
 		return name;
 	}
@@ -24,7 +21,7 @@ public class Players implements Serializable, Comparable<Players>{
 	}
 
 	@Override
-	public int compare(Players p1, Players p2) {
-		return p1.getScores()-p2.getScores();
+	public int compareTo(Players p1) {
+		return this.getScores()-p1.getScores();
 	}
 }

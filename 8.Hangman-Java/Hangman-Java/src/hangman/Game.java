@@ -61,8 +61,8 @@ public class Game {
             Scanner input = new Scanner(System.in);
             String playerName = input.next();
 
-            filerw.openAddRecordsandCloseFiletoWrite(mistakes, playerName);
-            filerw.openReadandWriteFileToRead();
+            filerw.openAndWritetoFile(mistakes, playerName);
+            filerw.openAndReadfromFile();
             filerw.printAndSortScoreBoard();
         
 
@@ -126,7 +126,7 @@ public class Game {
 
     //Wrapper for reading and printing scores
     private void sortAndPrintScore() {
-        filerw.openReadandWriteFileToRead();
+        filerw.openAndReadfromFile();
         filerw.printAndSortScoreBoard();
     }
 
