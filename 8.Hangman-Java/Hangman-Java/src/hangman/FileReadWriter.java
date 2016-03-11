@@ -66,5 +66,7 @@ public class FileReadWriter {
 			position++;
 		}
 	}
+	//7+7+5/3 = statements per methods 6.3!
+	//3 methods/class
 	
 }
