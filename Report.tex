@@ -430,9 +430,9 @@ Without filereadwriter.java & With filereadwriter.java \\ \hline
 \includegraphics[scale=0.5]{Project-after-with-filereadwriter.png} & \includegraphics[scale=0.5]{Kiviat-project-without-filereadwriter.png} \\ \hline
 \vspace {0.10 cm}
 \end{tabulary}
-
 The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it alo misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
 \textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
+So the only number we havent sufficiently achieved is Methods/class this is commented in detail in remarks.
 
 \subsection{New metrics at file level vs old} % just use kiviat graphs here?
 \begin{enumerate}
