@@ -2,6 +2,10 @@ package hangman;
 
 import java.io.Serializable;
 
+/* 
+ * Players implement Serializable so they easily can
+ * be written to and from files as object's 
+ */
 public class Players implements Serializable, Comparable<Players>{
 	
 	private String name;
@@ -19,7 +23,10 @@ public class Players implements Serializable, Comparable<Players>{
 	public int getScores() {
 		return scores;
 	}
-
+	
+	/*
+	 * Implemented for common sorting in the scoreboard-table. 
+	 */
 	@Override
 	public int compareTo(Players p1) {
 		return this.getScores()-p1.getScores();

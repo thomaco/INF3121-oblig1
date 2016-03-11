@@ -53,7 +53,8 @@ public class FileReadWriter {
 			System.err.println("Error opening file.");
 		}
 	}
-
+	
+	//Sorts and prints Scoreboard from ArrayList<Players>
 	public void printAndSortScoreBoard() {
 		Collections.sort(myArr);
 
