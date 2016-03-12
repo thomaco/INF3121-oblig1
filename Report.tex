@@ -9,6 +9,8 @@
 \usepackage{listings}
 \usepackage{graphicx}
 
+
+
 %\usepackage{listings}
 %\usepackage[cm]{fullpage}
 \renewcommand{\labelenumii}{\arabic{enumii}.}
@@ -290,11 +292,14 @@
 \end{tabulary}
 \pagebreak
 
-\includegraphics[width=0.9\textwidth]{Hangman-Kiviat-before.png}
+\includegraphics[scale=0.5]{Hangman-Kiviat-before.png}
 
-\textbf{Comments on the numbers}\newline
 
-We think that \textit{Comments, Max Complexity, Max Depth and Avg Depth}
+\begin{itemize}
+\item
+\vspace{0.2cm}
+	\textbf{Scanty metrics\newline}
+ We think that \textit{Comments, Max Complexity, Max Depth and Avg Depth}
 need to change. Also, \textit{Method Call Statements} and/or \textit{number of methods} might need some work.
  This is based on the Kivat graph and the numbers overall. 22(5.2\%) lines of comments seems
   rather low to ensure good documentation, max complexity and max depth of 12 indicates that
@@ -302,19 +307,25 @@ need to change. Also, \textit{Method Call Statements} and/or \textit{number of m
     methods contains too many nested statements. The ratio of method call statements(147)
      to number of methods(4.20 * 5 = 21) also seems somewhat off, and this number(like max
       complexity/max depth) might indicate that one method does too much work, or that methods
-       for doing some aggregated work is missing.
+       for doing some aggregated work is missing. 
+
+\end{itemize}
 
 
-To answer the rest of the questions; the biggest file by the number of lines is
- fileReadWriter.java with 219 lines, the file with the most branches is fileReadWriter.java
-  where the branches stands for 20,8 \% of the file. The file with the most complex code is
-   Game.java. The metrics used for this conclusion is Max complexity and Average Statements
-   per method, where Game.java's score here was 12 and 11.57. 
+\begin{itemize}
+ \item
+ \textbf{The biggest file} by the number of lines is fileReadWriter.java with 219 lines
+\item
+  \textbf{Most branches} is fileReadWriter.java where the branches stands for 20,8 \% of the file. 
+\item
+\textbf{Most complex code}
+  The file with the most complex code is Game.java. The metrics used for this conclusion is Max complexity and Average Statements per method, where Game.java's score here was 12 and 11.57.
+\end{itemize}
 
 \subsection{Metrics at file level}
 \vspace {0.10 cm}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{FileReadWriter-kiviat-before.png}
+\includegraphics[scale=0.4]{FileReadWriter-kiviat-before.png}
 \end{center}
 \begin{enumerate}
 \item
@@ -347,39 +358,61 @@ printAndSortScoreBoard()	& 10 & 24 & 8 & 32 \\ \hline
 readRecords()				& 6 & 13 & 7 & 8 \\ \hline
 tryCloseFileFromReading()	& 3 & 7 & 4 & 4 \\ \hline
 \end{tabulary}
-
-Based on the numbers overall and for each method, most definitely:
+\vspace{0.2cm}
+\newline
+\textit{The following premises was made:}\newline
+\vspace{0.1cm}
+\textbf{We would delete:}
+\vspace{0.1cm}
 \begin{enumerate}
 \item
-closeFileFromReading() because it only has one statement, which looks like a function call.
-Its name might also indicate that it does the same as tryCloseFileFromReading().
-
-\item
-nop() has 15 statements, whom are all system calls(based on the number), and a max depth
-of 10. Based on the numbers, this might be a rather useless method, unless it contains
-some sort of control flow, but based on the number of methods and its name, it is highly unlikely.
+nop() has 15 statements, whom are all system calls(based on the number), and a max depth of 10. Based on the numbers, this might be a rather useless method, unless it contains some sort of control flow, but based on the number of methods and its name, it is highly unlikely.
 
 \item
 oldReadRecords() might be deprecated method based on its name, since another method called addRecords() exists. It also contains only 5 statements, where all are system calls, so this is another method where its relevance is doubtful at best.
-\begin{comment}
-oldReadRecords() calls readRecords() 5 times. But for no apperent reason.
-This is undefined behavior because it doesnt check of many records that eventually
-would've been stored. It has the same problem as nop(), it is private and nothing else in this class is using it so it is rubbish.
-\end{comment}
+\end{enumerate}
+\vspace{0.4cm}
+The rest of the methods we would \textbf{re-factor/merge}.
+\vspace{0.2cm}
+\begin{enumerate}
+\item
+We want to merge open write/read close methods into one for
+reading the records and one for writing the records. So going from 6
+too 2 methods right there. This will mainly be achieved by try-with-resources.
+Lastly the printScoreBoard() methods will be utterly re-factored by deleting
+double code which it has for both sorting and printing the scoreboard, whereas one is even never used because the boolean constant is always false. More precisely we will implement comparable into Players so we can use the built-in Collections.sort() method to sort every player based om score which then has the compareTo() method implemented for sorting.
 
 \item
 printAndSortScorebard() has more calls then statements, which might indicate that it's not optimized or does something rather clunky.
 
 \end{enumerate}
 
-Do note that this list is only based on the metrics retrieved by SourceMonitor, and only contains those that clearly stood out. When the optimization begins, other methods may be touched if they are found to contain unusable/unnecessary code, badly optimized code etc.
+\textbf{Disclaimer:} \hspace{0.2cm} 
+\textit{Do note that this list is only based on the metrics retrieved by SourceMonitor, and only contains those that clearly stood out. When the optimization begins, other methods may be touched if they are found to contain unusable/unnecessary code, badly optimized code etc.}
 
 \end{enumerate}
+
+
+
 %Requirement 3
 \section{\textit{Requirement 3} -Improvements based on metrics}
 
 \subsection{Identified metrics at project level that needs improvment}
-\textbf{Comments, Max Complexity, Max Depth and Avg Depth} are metrics that really need to be improved, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
+Under requirements:
+\begin{itemize}
+\item
+\textbf{Comments - 5.2}
+\end{itemize}
+
+\hspace{-.5cm}Over requirements:
+
+\begin{itemize}
+\item
+\textbf{Max Complexity - 12, Max Depth - 9+ and Avg Depth - 2.90} 
+\end{itemize}
+
+So all of these really need to be improved, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
+
 
 \subsection{Examples of refactored/improved code}
 %Both list of code files, link to github public repo and specific cases
@@ -456,7 +489,7 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 
 	In FileReadWriter.java we have 20 statements and 3 methods which 
 	rounded up is 6.7 statements per method and 3 methods per class.\newline
-	\includegraphics[scale=0.5]{Kiviat-filereadwriter-after.png}\newline
+	\includegraphics[scale=0.4]{Kiviat-filereadwriter-after.png}\newline
 
 	\item
 	\textbf{Game.java}
@@ -467,6 +500,8 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 
 	\item%remove this if you choose not to have it in a separate file
 	\textbf{Command.java}
+	\textit{No change}, just a simple enum class no complexity analysis 
+	required for defining some simple constants. 
 
 \end{enumerate}
 
