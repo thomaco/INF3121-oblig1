@@ -411,8 +411,19 @@ Do note that this list is only based on the metrics retrieved by SourceMonitor, 
 	This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that actually does practically nothing.
 	\item
 	\textbf{Game.java}
-	First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game.
-	We also move
+	First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game, and we cleaned up some unnecessary blocks and statements. Next, we
+	created a class called runHangman, in which we placed initialization of class variables
+	which needed changing between games. Thus, we greatly simplified the constructor, and
+	eliminated a potential problem where stack overflow might occur due to too many games
+	started. As the getRandWord and getW were simple methods for setting two class variables, they were also eliminated since we could simplify them into one-line statements. When it comes to the method running the game, called findLetterAndPrintIt(),
+	we did a whole lot of refactoring. Firstly, we changed the name to gameLoop, as the name
+	was more describing. Secondly, we moved a whole lot of code into seperate methods. Checking
+	if the input consists of help was moved to the commandCheckAndExecute(former menu)-method, 
+	were the rest of the commands were handled, the input-loop were moved to a method called
+	inputLoop and checking the input for correctness(replacing dash with letter and countning 
+	number of correct characters) was moved to a method called 
+	replaceDashes(). This resulted in cleaner and more understandable code which has methods
+	whose focus lies on one thing.
 
 	\item% Er du uenig? Vi kan fint flytte den inn Game.java og slette hele filen?
 	% http://www.coderanch.com/t/385256/java/java/Package-Enums
@@ -424,12 +435,13 @@ Do note that this list is only based on the metrics retrieved by SourceMonitor, 
 
 
 \subsection{New metrics at project level vs old} % just use kiviat graphs here?
-\hspace*{-2.6cm}\begin{tabulary}{0.5\textwidth}{| c | c |}
+\hspace*{-0.5cm}
+\begin{tabulary}{0.5\textwidth}{| c | c |}
  \hline
 Without filereadwriter.java & With filereadwriter.java \\ \hline
-\includegraphics[scale=0.5]{Project-after-with-filereadwriter.png} & \includegraphics[scale=0.5]{Kiviat-project-without-filereadwriter.png} \\ \hline
-\vspace {0.10 cm}
-\end{tabulary}
+\includegraphics[scale=0.4]{Project-after-with-filereadwriter.png} & \includegraphics[scale=0.4]{Kiviat-project-without-filereadwriter.png} \\ \hline
+\end{tabulary}\vspace{0.2cm}
+
 The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it alo misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
 \textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
 So the only number we havent sufficiently achieved is Methods/class this is commented in detail in remarks.
@@ -465,7 +477,7 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 \subsection{Remarks and Conclusion}% skal renskrive det her imorgen!
 \textbf{Sourcemonitor calculation\newline}
 Sourcemonitor doesn't count statements that are separated
-by try\\catch or nested try\\catches even though they are guaranteed to be
+by try-catch or nested try-catches even though they are guaranteed to be
 executed. 
 Sourcemonitor also struggles with newly implemented 'syntatic' sugars and so forth like
 try with resources. We have to take all of this into consideration when reading these numbers.
@@ -475,6 +487,15 @@ When sourcemonitor caluclates your comments it only calculated how many lines ar
 
 
 \textbf{Explaination of FileReadWriter\newline}
+Here we had to make a choice between which metric we wanted to satisfy -
+Avg Stmts/methods or Methods/class. We chose Avgs Stmts/Methods since
+more Methods meant that we would increase average depth. The choice
+came from the fact that if we fulfill Avg Stmts/Methods, then
+Methods/Class goes under four, but if we satisfy Methods/Class, then
+Avg Stmts/Methods goes under 4.33. So it came to a choice between
+5 methods with only 3-4 statements in each method, or 3 methods with
+around 7 statements in each. \newline\newline
+\begin{comment}
 Avg Stmts/methods vs Methods/class
 chosed Stmts/methods since Methods/class
 also would've increased avg depth over 2.0
@@ -485,10 +506,10 @@ goes < 4 but if we satisfy Methods/class then Stmts/methods < 4.33.
 Either 3 or 5 methods for FileReadWriter.java also per class
 with only 3-4 statements in each or 3 methods with 7 statements
 in each method. 
-
+\end{comment}
 So in order to get the metrics inside the green area we would have to
-write meaningless code statements in order to get our statement per method up
-our have extra methods to get that ratio up which isn't particulary useful. Our
+write meaningless code statements in order to get our statement per method up,
+or have extra methods to get that ratio up which isn't particularly useful. Our
 methods contains exactly what they need to contain in order to do their job. Sourcemonitor
 thinks this is too small some places, but those numbers are only omnious. 
 This is the time to keep in mind that Sourcemonitor only is \textit{indicative}
