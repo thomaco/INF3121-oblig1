@@ -45,19 +45,21 @@
 	\subsection{Analysis of the testable parts of the program}
 	As this program shipped with no requirment, we had to rely on experience and knowledge about the game of hangman to create a model of the flow of the program. This model was based both on our experience, as well as observed behaviour of the program. From this model, we could use black-box technique to design test cases for the program. The test cases were then built as pr. definition, with pre- and post-conditions, inital state, result and steps.
 	
-	Out previous experience and knowledge helped us in setting up the requirements and model, from which we derived the different test cases. For the test cases, it especially made us set up cases for various forms of input, both valid and invalid, as this is the main vector from which users interact with the system.
+	Our previous experience and knowledge helped us in setting up the requirements and model, from which we derived the different test cases. For the test cases, it especially made us set up cases for various forms of input, both valid and invalid, as this is the main vector from which users interact with the system.
 \pagebreak
 
+{\small
 	\subsection{Test cases}
  %Start of test-cases
 %Missing test-case for checking number of mistakes is correct?
 	\begin{enumerate}
-	\setlength\itemsep{1em}
+	\setlength\itemsep{0.5cm}
 
 	\item \textbf{Start Hangman}\newline
 	\textbf{Initial state:} No program running.\newline
 	\textbf{Steps:}
 	\begin{enumerate}
+	\setlength\itemsep{0.1cm}
 	\item Run "java -cp . hangman.HangmanTets" from the folder containing the hangman folder with binaries
 	\end{enumerate}
 	\textbf{Expected results:} Game displays welcome-statement:
@@ -71,7 +73,7 @@
 	\textbf{Post condition:} Game awaits input
 
 	\item \textbf{Correct letter entered}\newline
-	\textbf{Initial State:} Multiple underlines are displayed in the secret word, more then one unique letter missing.\newline
+	\textbf{Initial State:} Multiple underlines are displayed in the secret word, more than one unique letter missing.\newline
 	\textbf{Steps:}
 	\begin{enumerate}
 	\item User enters a valid letter X.
@@ -210,7 +212,7 @@
 	\textbf{Post condition:} Game awaits user input.\newline
 	\end{enumerate}
 
-	\textbf{Non-functional testing}
+	\subsection{\textbf{Non-functional testing}}
 	After some discussion we realized that some factors in non-functional testing
 	are of importance. Namely:
 	\begin{enumerate}
@@ -243,7 +245,7 @@
 		\end{comment}
 
 	\end{enumerate}
-
+}
 
  %End of test-cases
 
@@ -253,6 +255,8 @@
 \subsection{Metrics at project level}
 
 %metrics at project level
+{\footnotesize
+\begin{center}
 \begin{tabulary}{1.0\textwidth}{| P{3cm} | P{2.7cm} | p{8.5cm} |}
 	\multicolumn{3}{c}{\textbf{Metrics summary}} \\ \hline
 	\textbf{Parameter} & \textbf{Value} & \textbf{How are the values} \\ \hline 
@@ -290,10 +294,12 @@
 	Line Number of Most Complex Method & undefined & This is more of a per-file value.\\ \hline
 	Line Number of Deepest Block & undefined & Another per-file value. \\ \hline
 \end{tabulary}
+\end{center}
+}%small
+\begin{center}
+\includegraphics[height=8cm,width=14cm]{Hangman-Kiviat-before.png}
+\end{center}
 \pagebreak
-
-\includegraphics[scale=0.5]{Hangman-Kiviat-before.png}
-
 
 \begin{itemize}
 \item
@@ -306,7 +312,7 @@ need to change. Also, \textit{Method Call Statements} and/or \textit{number of m
    at least one method does too much work, while average depth indicates that one or more
     methods contains too many nested statements. The ratio of method call statements(147)
      to number of methods(4.20 * 5 = 21) also seems somewhat off, and this number(like max
-      complexity/max depth) might indicate that one method does too much work, or that methods
+      complexity/max depth) might indicate that one method is overloaded, or that methods
        for doing some aggregated work is missing. 
 
 \end{itemize}
@@ -329,9 +335,7 @@ need to change. Also, \textit{Method Call Statements} and/or \textit{number of m
 \end{center}
 \begin{enumerate}
 \item
-How do you interpret the metrics applied on your file? How are they different the metrics you
-obtained on the whole project, compared with the metrics on this file?\newline
-\textbf{We chose FileReadWriter.java}\newline
+\textbf{We selected FileReadWriter.java}\newline
 We interpret FileReadWriter as more complex then the average for the project, as the 
 numbers for average complexity and average depth are higher. Its number for max complexity and
 max depth is also pretty high. At the same time, it looks like it's more commented then
@@ -341,8 +345,9 @@ pr method and the number of method seems well balanced.
 
 %Project vs FileReadWriter.java
 \item
-Would	you	refactor	(re-write)	any	of	the	methods you	have	in	this	file?	
-
+FileReadWriter method - statistics:
+\vspace{0.15cm}
+\newline
 \begin{tabulary}{0.5\textwidth}{| c | c | c | c | c |}
  \hline
 \textbf{Method names} &	\textbf{Complexity} & \textbf{Statements} & \textbf{Max Depth} & \textbf{Calls} \\ \hline
@@ -386,18 +391,18 @@ double code which it has for both sorting and printing the scoreboard, whereas o
 printAndSortScorebard() has more calls then statements, which might indicate that it's not optimized or does something rather clunky.
 
 \end{enumerate}
-
+\begin{comment}
 \textbf{Disclaimer:} \hspace{0.2cm} 
 \textit{Do note that this list is only based on the metrics retrieved by SourceMonitor, and only contains those that clearly stood out. When the optimization begins, other methods may be touched if they are found to contain unusable/unnecessary code, badly optimized code etc.}
-
+\end{comment}
 \end{enumerate}
 
 
 
 %Requirement 3
-\section{\textit{Requirement 3} -Improvements based on metrics}
+\section{\textit{Requirement 3} - Improvements based on metrics}
 
-\subsection{Identified metrics at project level that needs improvment}
+\subsection{Identified metrics at project level that needs improvement}
 
 \begin{center}
 \begin{tabulary}{0.5\textwidth}{| c | c |}
@@ -407,23 +412,18 @@ Under requirements: & Above requirements: \\ \hline
 \end{tabulary}
 \end{center}
 
-Everyone of these needs to improve, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
-
+Everyone of these needs to improve, as comments are very low, while the rest are very high. 
 
 \subsection{Examples of refactored/improved code}
 %Both list of code files, link to github public repo and specific cases
 \begin{enumerate}
 	\item
 	\textbf{FileReadWriter.java}
-	FileReadWriter has two which are never called and therefor removed nop() and oldReadRecords()
-	respectively.
-	closeFileFromReading() just calls tryCloseFileFromReading() so that one is removed.
+	has two methods which are never called and therefor we removed nop() and oldReadRecords() respectively.
+	closeFileFromReading() just calls tryCloseFileFromReading() so that one is also removed.
 	printAndSortScoreBoard() tries to print out results two times and sort the list two times.
-	The whole method is changed and now only contains a loop of the ArrayList myArr which is sorted
-	with collections.sort(). This works since Players.java has implemented Comparable<Players>.
-	And instead of having one method to open read/write and close I refactored all of these methods
-	sequences of operations to one for open, writing and closing and the same for open reading and closing. This is mainly achieved due to the use of try-with-resources which saves a lot of space and
-	makes closing method unnecessary in the whole file. 
+	The whole method is changed and now only contains one loop of the ArrayList myArr to print results. ArrayList myArr is sorted with collections.sort(). This is enabled with Players.java implementing Comparable<Players>.
+	And instead of having one method to open read/write and close we refactored all of these methods sequences of operations to one for open, writing and closing and the same for open reading and closing. This is mainly achieved due to the use of try-with-resources which saves a lot of space and makes closing method unnecessary in the whole file. And moving read/write opertions into these either of the opening methods. 
 	\textbf{Example from FileReadwriter \textit{opening file, writing to it and closing} :\newline}
 	\hspace*{-1.5cm}
 	\begin{tabulary}{0.5\textwidth}{| c | c |}
@@ -435,10 +435,10 @@ Everyone of these needs to improve, as comments are very low, while the rest are
 	\item
 	\textbf{Players.java}
 	Comments are added for explaining the implementations for Serializable and Comparable<Players>.
-	The method CompareTo is overrided so sorting can be done with the trivial Collections.sort() method. \textit{Why invent the wheel if it already exists?} 
+	The method CompareTo is overrided so sorting can be done with the trivial Collections.sort(myArr) method.
 	\item
 	\textbf{HangmanTets.java}
-	This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that actually does practically nothing.
+	This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that only calls a reference to another file(Game.java).
 	\item
 	\textbf{Game.java}
 	First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game, and we cleaned up some unnecessary blocks and statements. Next, we
@@ -475,7 +475,7 @@ Without filereadwriter.java & With filereadwriter.java \\ \hline
 
 The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it also misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
 \textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
-So the only number we havent sufficiently achieved is Methods/class this is commented in detail in remarks.
+So the only number we havent sufficiently achieved is Methods/class this is explained detaily in remarks.
 
 \subsection{New metrics at file level vs olds} 
 \begin{enumerate}
@@ -486,8 +486,8 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 	 Before & After \\ \hline
 	\includegraphics[scale=0.3]{FileReadWriter-kiviat-before.png} & \includegraphics[scale=0.4]{Kiviat-filereadwriter-after.png} \\ \hline
 	\end{tabulary}
-	\newline
 	\vspace{0.1cm}
+	\newline
 	\textit{Avg Stmts/methods Methods/class} must be calculated individually, due to the lack of support for newer datastructures. In FileReadWriter.java we have 20 statements and 3 methods which  rounded up is 6.7 statements per method and 3 methods per class. So the metrics here are all in the green area except Methods/class. That metric is only off by one so it's not that bad. \textit{An explanation of the metrics is given in the remarks/conclusion part.}
 	\item
 	\textbf{Game.java\newline}
@@ -509,7 +509,7 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 	\end{tabulary}
 	\newline
 	\vspace{0.1cm}
-	This is a object class and therefor it's not that a big of deal not to get all the metrics inside the
+	This is a structure class and therefor it's not that a big of deal not to get all the metrics inside the
 	green file. The reason for this is that the metrics of for Avg/max Depth, avg/max complexity truly is not relevant for this type of class, because there is no real programming logic here. The only methods we need are get methods and a comparaTo() methods here because the values of a Player is set in the constructors, so we could've added setters but they woud never be used hence \textit{garbage code}. So we commented on it and provided it with the compareTo() for sorting in FileReadWriter.java and that made the Methods/class inside the green area and \% Comments. 
 
 	\item%remove this if you choose not to have it in a separate file
@@ -524,40 +524,34 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 \href{https://github.com/thomaco/INF3121-oblig1}{\textbf{https://github.com/thomaco/INF3121-oblig1}}
 
 \subsection{Remarks and Conclusion}% skal renskrive det her imorgen!
-\textbf{Sourcemonitor calculation\newline}
+\textbf{Sourcemonitor calculation\vspace{0.2cm}\newline}
 Sourcemonitor doesn't count statements that are separated
 by try-catch or nested try-catches even though they are guaranteed to be
-executed.  Sourcemonitor also struggles with newly implemented 'syntatic' sugars and so forth like
-try with resources. We have to take all of this into consideration when reading these numbers.
-This is also the reason why we chose to show the result of the new project both with and without it.
-Also this is a decision the developers of Sourcemonitor has taken and as long as you are aware of this fact and consider this you will be fine. \newline
-When sourcemonitor caluclates your comments it only calculated how many lines are either \textbackslash \textbackslash or \textbackslash* * *\textbackslash not if there is some text there. I mean this misguides especially if one is a fan of the neat \textbackslash* * *\textbackslash syntax for writing code. Sourcemonitor also doesn't like minimized code, or it has a treshold for x of everything
-and if your code is more "effective/minized" then you will get a little under the given
-tresholds and under some requirements and if your code still does the job you don't need to
-adjust your code to fit into that particular metric. 
-
-
-\textbf{Explaination of FileReadWriter\newline}
-Here we had to make a choice between which metric we wanted to satisfy -
+executed.  Sourcemonitor also struggles with newly implemented 'syntatic' sugars and so forth like for example try with resources. We have to take all of this into consideration when analyzing these numbers.
+This is also the reason why we chose to show the result of the new project both with and without FileReadWriter and we also calculated how the results would've looked like.  When sourcemonitor caluclates your comments it only calculated how many lines are either \textbackslash \textbackslash or \textbackslash* * *\textbackslash not if there is some text there. I mean this misguides especially if one is a fan of the neat \textbackslash* * *\textbackslash syntax for writing code. Sourcemonitor also doesn't like minimized code, or it has a treshold for x of everything
+and if your code is more "effective/minized" then you will get a little under the given tresholds and under some requirements and if your code still does the job you don't need to adjust your code to fit into that particular metric.  So one needs to consider this when reading the measurements and adjusting them for their needs. \vspace{0.3cm} \newline
+\vspace{0.1cm}
+\textbf{Explanation of FileReadWriter\newline}
+We had to make a choice between which metric we wanted to satisfy -
 Avg Stmts/methods or Methods/class. We chose Avgs Stmts/Methods since
-more Methods meant that we would increase average depth. The choice
+more Methods meant that we would increase average depth. The reason
 came from the fact that if we fulfill Avg Stmts/Methods, then
 Methods/Class goes under four, but if we satisfy Methods/Class, then
-Avg Stmts/Methods goes under 4.33. So it came to a choice between
+Avg Stmts/Methods goes under 4.33. The we had two options between
 5 methods with only 3-4 statements in each method, or 3 methods with
-around 7 statements in each. \newline
-
-So in order to get the metrics inside the green area we would have to
-write meaningless code statements in order to get our statement per method up,
+approximately 7 statements in each. 
+In order to get \textbf{all} the metrics inside the green area we would have to
+write meaningless code statements in order to get our statement count per method up,
 or have extra methods to get that ratio up which isn't particularly useful. Our
-methods contains exactly what they need to contain in order to do their job. Sourcemonitor
-thinks this is too small some places, but those numbers are only omnious. 
+methods contains exactly what they need to contain in order to do their job. However Sourcemonitor thinks this is too small some places, but those numbers are only omnious. 
 This is the time to keep in mind that Sourcemonitor only is \textit{indicative}
 and not conclusive, actually far from it. It is only a small part of the analytics
-that should be done when analyzing code for optimization. \newline
+that should be done when analyzing code for optimization. \vspace{0.3cm} \newline
+\vspace{0.1cm}
 \textbf{Conclusion}
-We managed to get every metric inside the green area except one on the project level, and
-greatly improved and simplified the two major files in the project. The number of lines went down to 260 in the end compared to 441 when we started. The number of statements also was greatly reduced by nearly half(143) from 222. In general we minimzed the code by a bunch, added descriptive comments and refactored/deleted a bit of code. We also learned that you cannot always trust an analyzer because there can be errors in it so therefor one should be careful when reading the numbers without further investigation if they are far off but you really can't understand why. 
+\newline
+We managed to get every metric inside the green area except one on the project level, and greatly improved and simplified the two major files in the project. The number of lines went down to 260 in the end compared to 441 when we started. The number of statements also was greatly reduced by nearly half(143) from 222. In general we minimzed the code by a bunch, added descriptive comments and refactored/deleted a bit of code. We also learned that you cannot always trust an analyzer because there can be errors in it so therefor one should be careful when reading the numbers without further investigation if they are far off but you really can't understand why.
+\textit{Tansformation level} - It was intermediate to maintain functionality when re-factoring although so alright, we had to put it quite an effort to hyper optimize the code which took some hours. We would say the level as medium. \textit{Maintenance} - The one thing that this project is greatly lacking is the method descriptions of what it does, why it is there and so forth. Also giving descriptive variable and method names would been of great use. 
 
 
 \begin{comment}
