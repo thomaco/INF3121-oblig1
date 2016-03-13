@@ -12,7 +12,7 @@
 
 
 %\usepackage{listings}
-%\usepackage[cm]{fullpage}
+\usepackage[cm]{fullpage}
 \renewcommand{\labelenumii}{\arabic{enumii}.}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
 
@@ -372,7 +372,7 @@ nop() has 15 statements, whom are all system calls(based on the number), and a m
 oldReadRecords() might be deprecated method based on its name, since another method called addRecords() exists. It also contains only 5 statements, where all are system calls, so this is another method where its relevance is doubtful at best.
 \end{enumerate}
 \vspace{0.4cm}
-The rest of the methods we would \textbf{re-factor/merge}.
+The rest of the methods we would \textbf{Re-factor/merge}.
 \vspace{0.2cm}
 \begin{enumerate}
 \item
@@ -398,20 +398,16 @@ printAndSortScorebard() has more calls then statements, which might indicate tha
 \section{\textit{Requirement 3} -Improvements based on metrics}
 
 \subsection{Identified metrics at project level that needs improvment}
-Under requirements:
-\begin{itemize}
-\item
-\textbf{Comments - 5.2}
-\end{itemize}
 
-\hspace{-.5cm}Over requirements:
+\begin{center}
+\begin{tabulary}{0.5\textwidth}{| c | c |}
+  \hline
+Under requirements: & Above requirements: \\ \hline
+\textbf{Comments - 5.2} & \textbf{Max Complexity \- 12, Max Depth \- 9+ and Avg Depth \- 2.90} \\ \hline
+\end{tabulary}
+\end{center}
 
-\begin{itemize}
-\item
-\textbf{Max Complexity - 12, Max Depth - 9+ and Avg Depth - 2.90} 
-\end{itemize}
-
-So all of these really need to be improved, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
+Everyone of these needs to improve, as comments are very low, while the rest are very high. Methods/Class also seems somewhat low, and might be something that will naturally increase as we deal with the first four listed parameters.
 
 
 \subsection{Examples of refactored/improved code}
@@ -461,13 +457,13 @@ So all of these really need to be improved, as comments are very low, while the 
 	\item% Er du uenig? Vi kan fint flytte den inn Game.java og slette hele filen?
 	% http://www.coderanch.com/t/385256/java/java/Package-Enums
 	% eneste nyttige jeg fant om det.
-	\textbf{Commands.java}
-	We decided to keep this in it's own file to have more readable code. Although Game.java is the only one the commands. Having it in it's own file empowers the OO-programming scheme.
+	\textbf{Command.java}
+	We decided to keep this in it's own file to have more clean code. Having it in it's own file empowers the OO-programming scheme.
 
 \end{enumerate}
 
 
-\subsection{New metrics at project level vs old} % just use kiviat graphs here?
+\subsection{New metrics at project level} % just use kiviat graphs here?
 \hspace*{-0.5cm}
 \begin{tabulary}{0.5\textwidth}{| c | c |}
  \hline
@@ -479,28 +475,44 @@ The problem here is that Sourcemonitor doesn't count classes correctly, try-with
 \textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
 So the only number we havent sufficiently achieved is Methods/class this is commented in detail in remarks.
 
-\subsection{New metrics at file level vs old} % just use kiviat graphs here?
+\subsection{New metrics at file level vs olds} 
 \begin{enumerate}
 	\item
-	\textbf{FileReadWriter.java}
-	In FileReadWriter.java:\newline
-	\textit{Avg Stmts/methods Methods/class} must be calculated individually, due to the lack
-	of support for newer datastructures.
-
-	In FileReadWriter.java we have 20 statements and 3 methods which 
-	rounded up is 6.7 statements per method and 3 methods per class.\newline
-	\includegraphics[scale=0.4]{Kiviat-filereadwriter-after.png}\newline
+	\textbf{FileReadWriter.java\newline}
+	\begin{tabulary}{0.5\textwidth}{| c | c |}
+	\hline
+	 Before & After \\ \hline
+	\includegraphics[scale=0.3]{FileReadWriter-kiviat-before.png} & \includegraphics[scale=0.4]{Kiviat-filereadwriter-after.png} \\ \hline
+	\end{tabulary}
+	\newline
+	\vspace{0.1cm}
+	\textit{Avg Stmts/methods Methods/class} must be calculated individually, due to the lack of support for newer datastructures. In FileReadWriter.java we have 20 statements and 3 methods which  rounded up is 6.7 statements per method and 3 methods per class. So the metrics here are all in the green area except Methods/class. That metric is only off by one so it's not that bad. \textit{An explanation of the metrics is given in the remarks/conclusion part.}
+	\item
+	\textbf{Game.java\newline}
+	\begin{tabulary}{0.5\textwidth}{| c | c |}
+	\hline
+	Before & After \\ \hline
+	\includegraphics[scale=0.4]{Gamejava-old.png} & \includegraphics[scale=0.4]{Gamejava-new.png} \\ \hline
+	\end{tabulary}
+	\newline
+	\vspace{0.1cm}
+	Every metric here is improved although \% Comments falls just outside with 0.7 points, and that is so close that any change shouldn't be necessary.
 
 	\item
-	\textbf{Game.java}
-
-	\item
-	\textbf{Players.java} % gidder du å legge inn en kiviat graf her? hakke tilgang til windows akkurat nå.
-
+	\textbf{Players.java\newline} % gidder du å legge inn en kiviat graf her? hakke tilgang til windows akkurat nå.
+	\begin{tabulary}{0.5\textwidth}{| c | c |}
+	\hline
+	Before & After \\ \hline
+	\includegraphics[scale=0.4]{Playersjava-old.png} & \includegraphics[scale=0.4]{Playersjava-new.png} \\ \hline
+	\end{tabulary}
+	\newline
+	\vspace{0.1cm}
+	This is a object class and therefor it's not that a big of deal not to get all the metrics inside the
+	green file. The reason for this is that the metrics of for Avg/max Depth, avg/max complexity truly is not relevant for this type of class, because there is no real programming logic here. The only methods we need are get methods and a comparaTo() methods here because the values of a Player is set in the constructors, so we could've added setters but they woud never be used hence \textit{garbage code}. So we commented on it and provided it with the compareTo() for sorting in FileReadWriter.java and that made the Methods/class inside the green area and \% Comments. 
 
 	\item%remove this if you choose not to have it in a separate file
 	\textbf{Command.java}
-	\textit{No change}, just a simple enum class no complexity analysis 
+	\textit{No change}, a simple enum class no complexity analysis or refactoring 
 	required for defining some simple constants. 
 
 \end{enumerate}
@@ -513,12 +525,14 @@ So the only number we havent sufficiently achieved is Methods/class this is comm
 \textbf{Sourcemonitor calculation\newline}
 Sourcemonitor doesn't count statements that are separated
 by try-catch or nested try-catches even though they are guaranteed to be
-executed. 
-Sourcemonitor also struggles with newly implemented 'syntatic' sugars and so forth like
+executed.  Sourcemonitor also struggles with newly implemented 'syntatic' sugars and so forth like
 try with resources. We have to take all of this into consideration when reading these numbers.
 This is also the reason why we chose to show the result of the new project both with and without it.
 Also this is a decision the developers of Sourcemonitor has taken and as long as you are aware of this fact and consider this you will be fine. \newline
-When sourcemonitor caluclates your comments it only calculated how many lines are either \textbackslash \textbackslash or \textbackslash* * *\textbackslash not if there is some text there. I mean this misguides especially if one is a fan of the neat \textbackslash* * *\textbackslash syntax for writing code.
+When sourcemonitor caluclates your comments it only calculated how many lines are either \textbackslash \textbackslash or \textbackslash* * *\textbackslash not if there is some text there. I mean this misguides especially if one is a fan of the neat \textbackslash* * *\textbackslash syntax for writing code. Sourcemonitor also doesn't like minimized code, or it has a treshold for x of everything
+and if your code is more "effective/minized" then you will get a little under the given
+tresholds and under some requirements and if your code still does the job you don't need to
+adjust your code to fit into that particular metric. 
 
 
 \textbf{Explaination of FileReadWriter\newline}
@@ -529,7 +543,21 @@ came from the fact that if we fulfill Avg Stmts/Methods, then
 Methods/Class goes under four, but if we satisfy Methods/Class, then
 Avg Stmts/Methods goes under 4.33. So it came to a choice between
 5 methods with only 3-4 statements in each method, or 3 methods with
-around 7 statements in each. \newline\newline
+around 7 statements in each. \newline
+
+So in order to get the metrics inside the green area we would have to
+write meaningless code statements in order to get our statement per method up,
+or have extra methods to get that ratio up which isn't particularly useful. Our
+methods contains exactly what they need to contain in order to do their job. Sourcemonitor
+thinks this is too small some places, but those numbers are only omnious. 
+This is the time to keep in mind that Sourcemonitor only is \textit{indicative}
+and not conclusive, actually far from it. It is only a small part of the analytics
+that should be done when analyzing code for optimization. \newline
+\textbf{Conclusion}
+We managed to get every metric inside the green area except one on the project level, and
+greatly improved and simplified the two major files in the project. The number of lines went down to 260 in the end compared to 441 when we started. The number of statements also was greatly reduced by nearly half(143) from 222. In general we minimzed the code by a bunch, added descriptive comments and refactored/deleted a bit of code. We also learned that you cannot always trust an analyzer because there can be errors in it so therefor one should be careful when reading the numbers without further investigation if they are far off but you really can't understand why. 
+
+
 \begin{comment}
 Avg Stmts/methods vs Methods/class
 chosed Stmts/methods since Methods/class
@@ -541,21 +569,6 @@ goes < 4 but if we satisfy Methods/class then Stmts/methods < 4.33.
 Either 3 or 5 methods for FileReadWriter.java also per class
 with only 3-4 statements in each or 3 methods with 7 statements
 in each method. 
-\end{comment}
-So in order to get the metrics inside the green area we would have to
-write meaningless code statements in order to get our statement per method up,
-or have extra methods to get that ratio up which isn't particularly useful. Our
-methods contains exactly what they need to contain in order to do their job. Sourcemonitor
-thinks this is too small some places, but those numbers are only omnious. 
-This is the time to keep in mind that Sourcemonitor only is \textit{indicative}
-and not conclusive, actually far from it. It is only a small part of the analytics
-that should be done when analyzing code for optimization. 
-
-
-\begin{comment}
-make a couple of remarks about how easy or not it was for you to maintain the code
-(to modify it in order to improve it). Is there anything that you would have done differently on
-the ini'al code to make its maintenance easier?
 \end{comment}
 
 \end{document}
