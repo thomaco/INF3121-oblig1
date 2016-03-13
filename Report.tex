@@ -369,7 +369,7 @@ tryCloseFileFromReading()	& 3 & 7 & 4 & 4 \\ \hline
 nop() has 15 statements, whom are all system calls(based on the number), and a max depth of 10. Based on the numbers, this might be a rather useless method, unless it contains some sort of control flow, but based on the number of methods and its name, it is highly unlikely.
 
 \item
-oldReadRecords() might be deprecated method based on its name, since another method called addRecords() exists. It also contains only 5 statements, where all are system calls, so this is another method where its relevance is doubtful at best.
+oldReadRecords() might be deprecated method based on its name, since another method called readRecords() exists. It also contains only 5 statements, where all are system calls, so this is another method where its relevance is doubtful at best.
 \end{enumerate}
 \vspace{0.4cm}
 The rest of the methods we would \textbf{Re-factor/merge}.
@@ -425,7 +425,8 @@ Everyone of these needs to improve, as comments are very low, while the rest are
 	sequences of operations to one for open, writing and closing and the same for open reading and closing. This is mainly achieved due to the use of try-with-resources which saves a lot of space and
 	makes closing method unnecessary in the whole file. 
 	\textbf{Example from FileReadwriter \textit{opening file, writing to it and closing} :\newline}
-	\hspace*{-2.0cm}\begin{tabulary}{0.5\textwidth}{| c | c |}
+	\hspace*{-1.5cm}
+	\begin{tabulary}{0.5\textwidth}{| c | c |}
 	 \hline
 	 Before & after \\ \hline
 	\includegraphics[scale=0.4]{FileReadWriter-EXAMPLE-BEFORE.png} & \includegraphics[scale=0.4]{FileReaderWriter-EXAMPLE-AFTER.png} \\ \hline
@@ -434,17 +435,20 @@ Everyone of these needs to improve, as comments are very low, while the rest are
 	\item
 	\textbf{Players.java}
 	Comments are added for explaining the implementations for Serializable and Comparable<Players>.
-	The method CompareTo is overrided so sorting can be done with the trivial Collections.sort() method. \textit{Why invent the wheel if is already exists?} % du kan fjerne denne om du vil, men tror Raluca kanskje setter pris på den. :p
+	The method CompareTo is overrided so sorting can be done with the trivial Collections.sort() method. \textit{Why invent the wheel if it already exists?} 
 	\item
 	\textbf{HangmanTets.java}
 	This file is erased, because the only thing it does is making a reference to Game.java and calling the start method there. This is moved to Game.java. One file less that actually does practically nothing.
 	\item
 	\textbf{Game.java}
 	First of all we moved the logic from HangmanTets.java here so it got it's own main method which starts the game, and we cleaned up some unnecessary blocks and statements. Next, we
-	created a class called runHangman, in which we placed initialization of class variables
+	created a method called runHangman, in which we placed initialization of class variables
 	which needed changing between games. Thus, we greatly simplified the constructor, and
-	eliminated a potential problem where stack overflow might occur due to too many games
-	started. As the getRandWord and getW were simple methods for setting two class variables, they were also eliminated since we could simplify them into one-line statements. When it comes to the method running the game, called findLetterAndPrintIt(),
+	made the whole program run out of one single object, instead of having to initialize a
+	new object for each new game, risking a stack overflow. As the getRandWord and getW were 
+	simple methods for setting two class variables, they were also eliminated since we could
+	simplify them into one-line statements. When it comes to the method running the game, 
+	called findLetterAndPrintIt(),
 	we did a whole lot of refactoring. Firstly, we changed the name to gameLoop, as the name
 	was more describing. Secondly, we moved a whole lot of code into seperate methods. Checking
 	if the input consists of help was moved to the commandCheckAndExecute(former menu)-method, 
@@ -454,9 +458,7 @@ Everyone of these needs to improve, as comments are very low, while the rest are
 	replaceDashes(). This resulted in cleaner and more understandable code which has methods
 	whose focus lies on one thing.
 
-	\item% Er du uenig? Vi kan fint flytte den inn Game.java og slette hele filen?
-	% http://www.coderanch.com/t/385256/java/java/Package-Enums
-	% eneste nyttige jeg fant om det.
+	\item
 	\textbf{Command.java}
 	We decided to keep this in it's own file to have more clean code. Having it in it's own file empowers the OO-programming scheme.
 
@@ -471,7 +473,7 @@ Without filereadwriter.java & With filereadwriter.java \\ \hline
 \includegraphics[scale=0.4]{Project-after-with-filereadwriter.png} & \includegraphics[scale=0.4]{Kiviat-project-without-filereadwriter.png} \\ \hline
 \end{tabulary}\vspace{0.2cm}
 
-The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it alo misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
+The problem here is that Sourcemonitor doesn't count classes correctly, try-with-resources is not supported in Sourcemonitor and is regarded as classes not try's with a statement. So it also misses the statement count for whatever's inside the try. Therefor Methods/class, avg Stmts/Method is not counted correctly. So if we count statements and classes ourself the score for FileReadWriter is:
 \textit{Methods/class: 3 Avg and Stmts/methods: 6.7)} and this together with the rest of the project adds up to: \textit{Methods/class: 4.33+3/2=3.6 Avg and Stmts/methods: 6.7+5.50/2=6.1)}
 So the only number we havent sufficiently achieved is Methods/class this is commented in detail in remarks.
 

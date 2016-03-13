@@ -4,10 +4,10 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-	
+
     public static void main(String[] args) {
         Game myGame = new Game();
-        myGame.runHangman(); 
+        myGame.runHangman();
     }
 
     private static final String[] wordForGuesing = { "computer", "programmer",
@@ -68,9 +68,8 @@ public class Game {
             String playerName = input.next();
 
             filerw.openAndWritetoFile(mistakes, playerName);
-            filerw.openAndReadfromFile();
-            filerw.printAndSortScoreBoard();
-        
+            sortAndPrintScore();
+
 
         } else {
             System.out.println("But since you cheated. You are not allowed to enter into the scoreboard.");
